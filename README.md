@@ -21,7 +21,6 @@ A boilerplate and reference implementation for web applications built with React
 ## Requirements
 
 - [Node.js v8+](https://nodejs.org/) + [Yarn](https://yarnpkg.com/)
-- [React Native CLI](https://www.npmjs.com/package/react-native-cli) (`npm -g install react-native-cli`)
 
 ## Usage
 
