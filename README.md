@@ -1,4 +1,4 @@
-# React.js Starter
+# React Material Starter
 
 ...
 
