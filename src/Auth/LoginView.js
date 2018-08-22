@@ -6,7 +6,7 @@ import { connect } from 'react-redux';
 
 import { Button, TextField } from '@material-ui/core';
 
-import { $login } from './Auth.state';
+import { $login } from './state';
 
 const withStore = connect((state) => ({
   processing: state.Activity.processingByTopic['Auth.$login'] || false,

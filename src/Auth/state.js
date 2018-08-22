@@ -1,4 +1,4 @@
-import * as Activity from '../common/Activity.state';
+import * as Activity from '../Shared/Activity.state';
 
 import { AuthService } from './Auth.service';
 

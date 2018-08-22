@@ -119,5 +119,12 @@ if (process.env.NODE_ENV === 'development') {
     if (state.initializer && typeof state.initializer === 'function') {
       console.info(`$state.${module}: found 'initializer'`);
     }
+
+    // console.info(
+    //   `$state.${module}: found`,
+    //   Object.keys(state)
+    //     .filter((name) => SKIP.indexOf(name) === -1)
+    //     .map((name) => name),
+    // );
   });
 }

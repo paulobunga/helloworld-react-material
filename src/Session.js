@@ -24,9 +24,9 @@ import { connect } from 'react-redux';
 import ProfileView from './Auth/ProfileView';
 import HomeView from './Home/HomeView';
 
-// import * as Activity from './common/Activity.state';
+// import * as Activity from './Shared/Activity.state';
 
-import { $logout } from './Auth/Auth.state';
+import { $logout } from './Auth/state';
 
 const withStore = connect(
   (state) => ({

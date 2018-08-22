@@ -32,7 +32,7 @@ export function encode(result, name, value, mode = 'querystring') {
   }
 }
 
-export function toQueryString(data) {
+export function QueryString(data) {
   const result = {};
   Object.keys(data).forEach((key) => encode(result, encodeURIComponent(key), data[key], 'querystring'));
   const outcome = Object.keys(result)
@@ -41,7 +41,7 @@ export function toQueryString(data) {
   return outcome;
 }
 
-export function toFormData(data) {
+export function FormData(data) {
   const result = {};
   Object.keys(data).forEach((key) => encode(result, encodeURIComponent(key), data[key], 'formdata'));
   const outcome = new FormData();
@@ -62,7 +62,7 @@ export function Request(method, url, options = {}) {
     url = url.replace(new RegExp(`:${param}`), encodeURIComponent(value));
   });
 
-  const queryString = toQueryString(query);
+  const queryString = QueryString(query);
 
   url += queryString ? `?${queryString}` : '';
 

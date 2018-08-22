@@ -95,5 +95,5 @@ export const AuthServiceImplementation = class AuthService {
 export const AuthService = new AuthServiceImplementation();
 
 if (process.env.NODE_ENV === 'development') {
-  global.$auth = AuthService;
+  global.AuthService = AuthService;
 }
