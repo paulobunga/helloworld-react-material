@@ -2,13 +2,13 @@ import React, { Component } from 'react';
 
 import { Switch, Route, Redirect } from 'react-router-dom';
 
-import { COLOR } from './common/styles';
+import { COLOR } from '../common/styles';
 
-import LoginView from './Auth/LoginView';
-import SignupView from './Auth/SignupView';
-import ResetView from './Auth/ResetView';
+import LoginView from './LoginView';
+import SignupView from './SignupView';
+import ResetView from './ResetView';
 
-import LOGO from './assets/logo.png';
+import LOGO from '../assets/logo.png';
 
 // eslint-disable-next-line
 class Entrance extends Component {
@@ -24,7 +24,7 @@ class Entrance extends Component {
             flexDirection: 'column',
           }}
         >
-          <img src={LOGO} alt="logo" />
+          <img src={LOGO} alt="logo" style={{ marginBottom: 16 }} />
 
           <Switch>
             <Route exact path="/login" component={LoginView} />

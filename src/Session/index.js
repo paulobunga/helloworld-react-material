@@ -21,12 +21,10 @@ import {
 
 import { connect } from 'react-redux';
 
-import ProfileView from './Auth/ProfileView';
-import HomeView from './Home/HomeView';
+import ProfileView from './ProfileView';
+import HomeView from '../Home/HomeView';
 
-// import * as Activity from './Shared/Activity.state';
-
-import { $logout } from './Auth/state';
+import { $logout } from '../Auth/state';
 
 const withStore = connect(
   (state) => ({
@@ -90,7 +88,7 @@ class Session extends Component {
 
   render() {
     const { swipeableDrawerCallapsed, navigationMenuItems } = this.state;
-    const { user } = this.props;
+    const { user, logout } = this.props;
 
     return (
       <div className="-x-fit">
@@ -133,7 +131,7 @@ class Session extends Component {
               </Link>
             ))}
 
-            <ListItem dense button onClick={() => this.props.logout()}>
+            <ListItem dense button onClick={() => logout()}>
               <ListItemIcon>
                 <Icon>exit_to_app</Icon>
               </ListItemIcon>
@@ -156,6 +154,7 @@ class Session extends Component {
 
 Session.propTypes = {
   logout: PropTypes.func.isRequired,
+  user: PropTypes.object.isRequired,
 };
 
 export default Connector(Session);

@@ -6,7 +6,9 @@ import { connect } from 'react-redux';
 
 import { Button, TextField } from '@material-ui/core';
 
-import { $login } from './state';
+import * as $validate from '../common/validate';
+
+import { $login } from '../Auth/state';
 
 const withStore = connect((state) => ({
   processing: state.Activity.processingByTopic['Auth.$login'] || false,
@@ -20,25 +22,67 @@ class LoginView extends Component {
   state = {
     username: process.env.NODE_ENV === 'development' ? 'test@example.com' : '',
     password: process.env.NODE_ENV === 'development' ? 'test' : '',
+    error: {
+      username: null,
+      password: null,
+    },
   };
 
   login() {
-    // TODO: ADD FORM VALIDATION
     const { username, password } = this.state;
-
+    // eslint-disable-next-line
     return this.props.dispatch($login(username, password)).catch((error) => console.log('error.. ', error));
-    // .catch((error) => this.props.dispatch(Activity.$toast('failure', error.message)));
+  }
+
+  handleInputChange(event) {
+    this.setState({
+      [event.target.id]: event.target.value,
+    });
+  }
+
+  handleInputValidation(value, key, rules) {
+    $validate.exec(value, rules, (error) => {
+      const _error = {
+        [key]: error,
+      };
+
+      this.setState({
+        error: { ...this.state.error, ..._error },
+      });
+    });
   }
 
   render() {
-    const { username, password } = this.state;
+    const { username, password, error } = this.state;
     const { processing } = this.props;
 
     return (
       <div>
         <form style={{ display: 'flex', flexWrap: 'wrap', flexDirection: 'column' }}>
-          <TextField label="Email" id="username" margin="dense" value={username} />
-          <TextField label="Password" type="password" id="password" margin="dense" value={password} />
+          <TextField
+            label="Email"
+            id="username"
+            autoComplete="current-username"
+            margin="dense"
+            value={username}
+            error={!!error.username}
+            helperText={error.username}
+            onBlur={(event) => this.handleInputValidation(event.target.value, event.target.id, [$validate.required, $validate.email])}
+            onChange={(event) => this.handleInputChange(event)}
+          />
+
+          <TextField
+            label="Password"
+            type="password"
+            id="password"
+            autoComplete="current-password"
+            margin="dense"
+            value={password}
+            error={!!error.password}
+            helperText={error.password}
+            onBlur={(event) => this.handleInputValidation(event.target.value, event.target.id, [$validate.required, $validate.password])}
+            onChange={(event) => this.handleInputChange(event)}
+          />
         </form>
 
         <Button

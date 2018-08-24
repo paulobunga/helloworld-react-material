@@ -2,6 +2,18 @@
  * VALIDATION RULES
  */
 
+export const exec = (value, rules, cb) => {
+  let _error = [];
+  rules.forEach((rule) => {
+    if (rule(value) === true) {
+      return;
+    }
+    _error = [..._error, rule(value)];
+    // _error = [..._error, new Error(rule(value))];
+  });
+  cb(_error.length ? _error : null);
+};
+
 export const PASSWORD_LENGTH = 8;
 export const EMAIL_PATTERN = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
 
@@ -13,3 +25,5 @@ export const email = (value) => {
   const pattern = EMAIL_PATTERN;
   return pattern.test(value) || 'Invalid email.';
 };
+
+export const username = email;

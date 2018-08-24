@@ -5,8 +5,6 @@ import { connect } from 'react-redux';
 
 import { Button } from '@material-ui/core';
 
-// import { COLOR } from '../common/styles';
-
 const withStore = connect((state) => ({
   ready: state.Activity.ready,
   authenticated: state.Auth.authenticated,
