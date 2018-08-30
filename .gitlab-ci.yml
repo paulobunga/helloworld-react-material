@@ -1,30 +1,41 @@
 stages:
-  # - lint
   - test
   - build
   # - deploy
 
+image: node:8
+
+# Cache modules in between jobs
+cache:
+  key: ${CI_COMMIT_REF_SLUG}
+  paths:
+  - node_modules/
+
+before_script:
+  - yarn install
+
 lint:
   stage: test
-  image: node:8
+  allow_failure: true
   script:
-    - yarn run lint
-  cache:
-    key: ${CI_COMMIT_REF_SLUG}
-    paths:
-      - ./node_modules/
+    - yarn lint
+
+lint-critical:
+  stage: test
+  allow_failure: true
+  script:
+    - yarn lint:critical
 
 test:
   stage: test
-  image: node:8
+  allow_failure: true
   script:
-    - yarn run test
+    - yarn test
 
 build:
   stage: build
-  image: node:8
   script:
-    - yarn run build
+    - yarn build
   only:
     - master
   artifacts:
