@@ -64,9 +64,11 @@ const AUTH_LOGOUT = 'AUTH_LOGOUT';
 
 export function $logout() {
   return (dispatch) => {
-    return AuthService.logout().then(() => dispatch({
-      type: AUTH_LOGOUT,
-    }));
+    return AuthService.logout().then(() =>
+      dispatch({
+        type: AUTH_LOGOUT,
+      }),
+    );
   };
 }
 

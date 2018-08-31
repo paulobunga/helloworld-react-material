@@ -1,7 +1,7 @@
 stages:
   - test
   - build
-  # - deploy
+  - deploy
 
 image: node:8
 
@@ -41,3 +41,20 @@ build:
   artifacts:
     paths:
       - ./build/
+
+pages:
+  stage: deploy
+  script:
+    - mv build public
+  # only:
+  #   - master
+
+# deploy:
+#   stage: deploy
+#   script:
+#     - echo "deploying..."
+#   environment:
+#       name: production
+#       url: '.....'
+#   only:
+#     - master

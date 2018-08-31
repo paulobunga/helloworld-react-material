@@ -31,5 +31,5 @@ export const theme = createMuiTheme({
     off: {
       main: COLOR.off,
     },
-  }
+  },
 });
