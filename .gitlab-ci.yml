@@ -22,7 +22,7 @@ lint:
 
 lint-critical:
   stage: test
-  allow_failure: true
+  # allow_failure: true
   script:
     - yarn lint:critical
 
@@ -51,5 +51,18 @@ deploy:github:
   environment:
       name: production
       url: 'https://emiketic.github.io/emiketic-starter-react-material'
+  only:
+    - master
+
+deploy:ftp:
+  stage: deploy
+  dependencies:
+    - build
+  script:
+    - echo 'deploy via FTP...'
+  when: manual
+  environment:
+      name: production
+      url: 'https://react-material.starter.emiketic.com'
   only:
     - master
