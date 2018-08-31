@@ -1,4 +1,5 @@
 {
+  "parser": "babel-eslint",
   "parserOptions": {
     "ecmaVersion": 2018,
     "sourceType": "module",
@@ -23,5 +24,8 @@
     "node": true,
     "browser": true,
     "es6": true
+  },
+  "globals": {
+    "it": true
   }
 }
