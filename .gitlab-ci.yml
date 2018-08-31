@@ -3,9 +3,6 @@ stages:
   - build
   - deploy
 
-image: node:8
-
-# Cache modules in between jobs
 cache:
   key: ${CI_COMMIT_REF_SLUG}
   paths:
@@ -16,24 +13,36 @@ before_script:
 
 lint:
   stage: test
+  tags:
+    - docker
+  image: node:8
   allow_failure: true
   script:
     - yarn lint
 
 lint-critical:
   stage: test
+  tags:
+    - docker
+  image: node:8
   # allow_failure: true
   script:
     - yarn lint:critical
 
 test:
   stage: test
+  tags:
+    - docker
+  image: node:8
   allow_failure: true
   script:
     - yarn test
 
 build:
   stage: build
+  tags:
+    - docker
+  image: node:8
   script:
     - yarn build
   artifacts:
@@ -44,6 +53,9 @@ deploy:
   stage: deploy
   dependencies:
     - build
+  tags:
+    - docker
+  image: node:8
   only:
     - master
   script:
