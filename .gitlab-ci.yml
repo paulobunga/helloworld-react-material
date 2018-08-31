@@ -42,22 +42,26 @@ build:
     paths:
       - ./build/
 
-pages:
+# pages:
+#   stage: deploy
+#   dependencies:
+#     - build
+#   script:
+#     - mv build public
+#   artifacts:
+#     paths:
+#       - public
+#   # only:
+#   #   - master
+
+deploy:github-pages:
   stage: deploy
+  dependencies:
+    - build
   script:
-    - mv build public
-  artifacts:
-    paths:
-      - public
+    - yarn deploy:github
+  environment:
+      name: production
+      url: 'https://emiketic.github.io/emiketic-starter-react-material'
   # only:
   #   - master
-
-# deploy:
-#   stage: deploy
-#   script:
-#     - echo "deploying..."
-#   environment:
-#       name: production
-#       url: '.....'
-#   only:
-#     - master
