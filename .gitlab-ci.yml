@@ -47,4 +47,4 @@ deploy:
   only:
     - master
   script:
-    - ./scripts/upload.sh ./dist/
+    - ./scripts/upload.sh ./build/
