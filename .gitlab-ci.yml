@@ -40,27 +40,11 @@ build:
     paths:
       - ./build/
 
-deploy:github:
+deploy:
   stage: deploy
   dependencies:
     - build
-  script:
-    - yarn deploy:github
-  environment:
-      name: production
-      url: 'https://emiketic.github.io/emiketic-starter-react-material'
   only:
     - master
-
-deploy:ftp:
-  stage: deploy
-  dependencies:
-    - build
   script:
-    - echo 'deploy via FTP...'
-  when: manual
-  environment:
-      name: production
-      url: 'https://react-material.starter.emiketic.com'
-  only:
-    - master
+    - ./scripts/upload.sh ./dist/

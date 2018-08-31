@@ -6,7 +6,6 @@
   "dependencies": {
     "@material-ui/core": "1.5.1",
     "@material-ui/icons": "2.0.3",
-    "gh-pages": "1.2.0",
     "promise.prototype.finally": "3.1.0",
     "prop-types": "15.6.2",
     "react": "^16.4.2",
@@ -27,7 +26,6 @@
     "format:all": "prettier --ignore-path .gitignore ./**/*.{md,json,js,css,scss} --write",
     "format:js": "eslint --ignore-path .gitignore --ext .js --fix ./",
     "build": "react-scripts build",
-    "deploy:github": "gh-pages -d build",
     "test": "react-scripts test --env=jsdom --setupTestFrameworkScriptFile ./localStoragePolyfill.js"
   },
   "devDependencies": {
