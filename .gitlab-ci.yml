@@ -36,8 +36,6 @@ build:
   stage: build
   script:
     - yarn build
-  only:
-    - master
   artifacts:
     paths:
       - ./build/
