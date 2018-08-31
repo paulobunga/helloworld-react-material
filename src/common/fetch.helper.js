@@ -50,7 +50,9 @@ export function FormData(data) {
 }
 
 export function Request(method, url, options = {}) {
-  let { route, query, headers, body, ...more } = options;
+  let {
+    route, query, headers, body, ...more
+  } = options;
 
   route = route || {};
   query = query || {};

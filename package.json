@@ -28,7 +28,7 @@
     "format:js": "eslint --ignore-path .gitignore --ext .js --fix ./",
     "build": "react-scripts build",
     "deploy:github": "gh-pages -d build",
-    "test": "react-scripts test --env=jsdom"
+    "test": "react-scripts test --env=jsdom --setupTestFrameworkScriptFile ./localStoragePolyfill.js"
   },
   "devDependencies": {
     "babel-eslint": "8.2.6",

@@ -1,7 +1,9 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 
-import { Switch, Route, Redirect, Link, withRouter } from 'react-router-dom';
+import {
+  Switch, Route, Redirect, Link, withRouter,
+} from 'react-router-dom';
 
 import {
   AppBar,

@@ -67,8 +67,7 @@ class LoginView extends Component {
             value={username}
             error={!!error.username}
             helperText={error.username}
-            onBlur={(event) =>
-              this.handleInputValidation(event.target.value, event.target.id, [$validate.required, $validate.email])
+            onBlur={(event) => this.handleInputValidation(event.target.value, event.target.id, [$validate.required, $validate.email])
             }
             onChange={(event) => this.handleInputChange(event)}
           />
@@ -82,8 +81,7 @@ class LoginView extends Component {
             value={password}
             error={!!error.password}
             helperText={error.password}
-            onBlur={(event) =>
-              this.handleInputValidation(event.target.value, event.target.id, [$validate.required, $validate.password])
+            onBlur={(event) => this.handleInputValidation(event.target.value, event.target.id, [$validate.required, $validate.password])
             }
             onChange={(event) => this.handleInputChange(event)}
           />

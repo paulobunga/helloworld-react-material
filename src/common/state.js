@@ -1,4 +1,6 @@
-import { combineReducers, createStore, applyMiddleware, compose } from 'redux';
+import {
+  combineReducers, createStore, applyMiddleware, compose,
+} from 'redux';
 import thunk from 'redux-thunk';
 import { createLogger } from 'redux-logger';
 import persistState, { mergePersistedState } from 'redux-localstorage';
@@ -14,9 +16,9 @@ let reducer = combineReducers(
   Object.entries($state).reduce((result, [name, substate]) => {
     return substate.reducer
       ? {
-          ...result,
-          [name]: substate.reducer,
-        }
+        ...result,
+        [name]: substate.reducer,
+      }
       : result;
   }, {}),
 );
@@ -31,19 +33,18 @@ reducer = compose(mergePersistedState())(reducer);
  * define persistence
  */
 
-const persistSelector = (state) =>
-  Object.entries($state).reduce((result, [name, substate]) => {
-    return substate.persister
-      ? {
-          ...result,
-          [name]: substate.persister(state[name]),
-        }
-      : result;
-  }, {});
+const persistSelector = (state) => Object.entries($state).reduce((result, [name, substate]) => {
+  return substate.persister
+    ? {
+      ...result,
+      [name]: substate.persister(state[name]),
+    }
+    : result;
+}, {});
 
 const persistStorage = compose((storage) => {
   storage._put = storage.put;
-  storage.put = function(key, state, callback) {
+  storage.put = function (key, state, callback) {
     storage._put(key, persistSelector(state), callback);
   };
   return storage;
@@ -61,8 +62,7 @@ if (process.env.NODE_ENV !== 'production') {
   enhancerMiddleware.push(createLogger());
 }
 
-const composeEnhancers =
-  global && global.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ ? global.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__({}) : compose;
+const composeEnhancers = global && global.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ ? global.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__({}) : compose;
 
 const enhancer = composeEnhancers(applyMiddleware(...enhancerMiddleware), persistEnhancer);
 
