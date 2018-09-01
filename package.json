@@ -2,7 +2,6 @@
   "name": "emiketic-starter-react-material",
   "version": "0.1.0",
   "private": true,
-  "homepage": "https://emiketic.github.io/emiketic-starter-react-material",
   "dependencies": {
     "@material-ui/core": "1.5.1",
     "@material-ui/icons": "2.0.3",
@@ -25,8 +24,8 @@
     "format": "npm run format:all ; npm run format:js",
     "format:all": "prettier --ignore-path .gitignore ./**/*.{md,json,js,css,scss} --write",
     "format:js": "eslint --ignore-path .gitignore --ext .js --fix ./",
-    "build": "react-scripts build",
-    "test": "react-scripts test --env=jsdom --setupTestFrameworkScriptFile ./localStoragePolyfill.js"
+    "test": "react-scripts test --env=jsdom --setupTestFrameworkScriptFile ./jest.setup.js",
+    "build": "react-scripts build "
   },
   "devDependencies": {
     "babel-eslint": "8.2.6",
