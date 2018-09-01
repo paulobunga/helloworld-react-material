@@ -58,7 +58,7 @@ deploy:
     - build
   tags:
     - docker
-  image: kalahari/ncftp
+  image: emiketic/essentials
   only:
     - master
   script:
