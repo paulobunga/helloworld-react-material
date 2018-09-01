@@ -11,7 +11,4 @@ fi
 
 cd $TARGET
 
-for path in $(find -type f)
-do
-  curl --fail --ftp-create-dirs -u "${FTP_USERNAME}:${FTP_PASSWORD}" "ftp://${FTP_DOMAIN}${FTP_PATH}/${path}" -T $path
-done
+ncftpput -R -v -u "$FTP_USERNAME" -p "$FTP_PASSWORD" "$FTP_DOMAIN" "$FTP_PATH" ./

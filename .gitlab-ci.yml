@@ -8,15 +8,14 @@ cache:
   paths:
   - node_modules/
 
-before_script:
-  - yarn install
-
 lint:
   stage: test
   tags:
     - docker
   image: node:8
   allow_failure: true
+  before_script:
+    - yarn install
   script:
     - yarn lint
 
@@ -26,6 +25,8 @@ lint-critical:
     - docker
   image: node:8
   # allow_failure: true
+  before_script:
+    - yarn install
   script:
     - yarn lint:critical
 
@@ -35,6 +36,8 @@ test:
     - docker
   image: node:8
   allow_failure: true
+  before_script:
+    - yarn install
   script:
     - yarn test
 
@@ -55,7 +58,7 @@ deploy:
     - build
   tags:
     - docker
-  image: node:8
+  image: kalahari/ncftp
   only:
     - master
   script:

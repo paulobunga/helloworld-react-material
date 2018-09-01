@@ -11,7 +11,7 @@
     "react-dom": "^16.4.2",
     "react-redux": "5.0.7",
     "react-router-dom": "4.3.1",
-    "react-scripts": "1.1.4",
+    "react-scripts": "1.1.5",
     "redux": "4.0.0",
     "redux-localstorage": "1.0.0-rc5",
     "redux-logger": "3.0.6",
@@ -30,7 +30,7 @@
   "devDependencies": {
     "babel-eslint": "8.2.6",
     "debug": "3.1.0",
-    "eslint": "5.4.0",
+    "eslint": "5.5.0",
     "eslint-config-airbnb": "17.1.0",
     "eslint-plugin-import": "2.14.0",
     "eslint-plugin-jsx-a11y": "6.1.1",
