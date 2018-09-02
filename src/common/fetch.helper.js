@@ -7,7 +7,7 @@ import { createLogger } from './logger';
 const Logger = createLogger('FetchHelper');
 
 /**
- * Query String and FormData
+ * Query String and Form Data
  */
 
 export function encode(result, name, value, mode = 'querystring') {
@@ -32,7 +32,7 @@ export function encode(result, name, value, mode = 'querystring') {
   }
 }
 
-export function QueryString(data) {
+export function toQueryString(data) {
   const result = {};
   Object.keys(data).forEach((key) => encode(result, encodeURIComponent(key), data[key], 'querystring'));
   const outcome = Object.keys(result)
@@ -41,7 +41,7 @@ export function QueryString(data) {
   return outcome;
 }
 
-export function FormData(data) {
+export function toFormData(data) {
   const result = {};
   Object.keys(data).forEach((key) => encode(result, encodeURIComponent(key), data[key], 'formdata'));
   const outcome = new FormData();
@@ -62,7 +62,7 @@ export function Request(method, url, options = {}) {
     url = url.replace(new RegExp(`:${param}`), encodeURIComponent(value));
   });
 
-  const queryString = QueryString(query);
+  const queryString = toQueryString(query);
 
   url += queryString ? `?${queryString}` : '';
 
