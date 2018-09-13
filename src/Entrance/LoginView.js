@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 
-import { withRouter } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 
 import { Button, TextField } from '@material-ui/core';
@@ -15,7 +15,7 @@ const withStore = connect((state) => ({
 }));
 
 // provides route prcops and rerender on route change, provides shared state and actions as props;
-const Connector = (C) => withRouter(withStore(C));
+const Connector = (C) => withStore(C);
 
 // eslint-disable-next-line
 class LoginView extends Component {
@@ -97,10 +97,10 @@ class LoginView extends Component {
         </Button>
 
         <div style={{ marginTop: 16 }}>
-          <Button href="/signup" className="text-white">
+          <Button component={Link} to="/signup" className="text-white">
             Signup
           </Button>
-          <Button href="/reset" className="text-white">
+          <Button component={Link} to="/reset" className="text-white">
             Reset
           </Button>
         </div>
