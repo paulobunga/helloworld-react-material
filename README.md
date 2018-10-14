@@ -1,4 +1,4 @@
-# React Material Starter
+# React Starter
 
 A boilerplate and reference implementation for web applications built with React, Redux, and React Material.
 
