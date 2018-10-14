@@ -2,10 +2,6 @@
 
 A boilerplate and reference implementation for web applications built with React, Redux, and React Material.
 
-## Preview
-
-...
-
 ## References
 
 - [Guidelines](https://github.com/emiketic/emiketic-docs/)
