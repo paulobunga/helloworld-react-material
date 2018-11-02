@@ -1,4 +1,9 @@
+import * as Logger from '../common/logger';
+import * as StateHelper from '../common/state.helper';
+import * as FetchHelper from '../common/fetch.helper';
+
 import * as Activity from '../Shared/Activity.state';
+import { $ready, $initialize } from '../Shared/state';
 
 import { AuthService } from './Auth.service';
 
@@ -38,7 +43,7 @@ function loginFailure(error) {
       type: AUTH_LOGIN_FAILURE,
     });
 
-    // dispatch(Activity.$message(error.message));
+    dispatch(Activity.$message(error.message));
 
     throw error;
   };
@@ -51,6 +56,7 @@ export function $login(username, password) {
 
     return AuthService.login(username, password)
       .then((result) => dispatch(loginSuccess(result)))
+      .then((result) => dispatch($initialize()).then(() => result))
       .catch((error) => dispatch(loginFailure(error)))
       .finally(() => dispatch(Activity.$done(MODULE, $login.name)));
   };
@@ -104,7 +110,7 @@ function signupFailure(error) {
       type: AUTH_SIGNUP_FAILURE,
     });
 
-    // dispatch(Activity.$message(error.message));
+    dispatch(Activity.$message(error.message));
 
     throw error;
   };
@@ -155,7 +161,7 @@ function initiateAccountRecoveryFailure(error) {
       type: AUTH_RECOVERY_FAILURE,
     });
 
-    // dispatch(Activity.$message(error.message));
+    dispatch(Activity.$message(error.message));
 
     throw error;
   };
@@ -221,6 +227,15 @@ export function persister({ authenticated, user }) {
 }
 
 export async function initializer({ dispatch, getState }) {
+  FetchHelper.events.on('failure', (error, response) => {
+    if (AuthService.isAuthenticated() && response.status === 401) {
+      dispatch($login(AuthService.username, AuthService.password)).catch((error) => {
+        dispatch(Activity.$toast('failure', error.message));
+        dispatch($logout());
+      });
+    }
+  });
+
   await AuthService.initialize();
 
   if (AuthService.isAuthenticated()) {
@@ -231,5 +246,5 @@ export async function initializer({ dispatch, getState }) {
     });
   }
 
-  dispatch(Activity.$done());
+  dispatch($ready());
 }

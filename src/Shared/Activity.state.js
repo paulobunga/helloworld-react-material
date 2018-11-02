@@ -57,6 +57,146 @@ export function $done(module = 'App', operation = 'default') {
 }
 
 /**
+ * Message
+ */
+
+const ACTIVITY_MESSAGE = 'ACTIVITY_MESSAGE';
+
+export function $message(message, { notify = false } = {}) {
+  return (dispatch) => {
+    Logger.debug('$message', message);
+
+    dispatch({
+      type: ACTIVITY_MESSAGE,
+      message,
+    });
+
+    if (notify) {
+      // @TODO implement
+    }
+  };
+}
+
+/**
+ * Notification
+ */
+
+const NOTIFICATION_TYPE = {
+  success: 'success',
+  failure: 'danger',
+  warning: 'warning',
+  info: '',
+  default: '',
+};
+
+const ACTIVITY_STATUS = 'ACTIVITY_STATUS';
+
+export function $status(type, label) {
+  type = NOTIFICATION_TYPE[type] || NOTIFICATION_TYPE.default;
+
+  Logger.debug('$status', type, label);
+
+  // @TODO implement
+
+  return {
+    type: ACTIVITY_STATUS,
+    params: {
+      type,
+      label,
+    },
+  };
+}
+
+const ACTIVITY_TOAST = 'ACTIVITY_TOAST';
+
+export function $toast(type, title, content = '') {
+  type = NOTIFICATION_TYPE[type] || NOTIFICATION_TYPE.default;
+
+  Logger.debug('$toast', type, title, content);
+
+  // @TODO implement
+
+  return {
+    type: ACTIVITY_TOAST,
+    params: {
+      type,
+      title,
+      content,
+    },
+  };
+}
+
+/**
+ * Alerts
+ */
+
+const ACTIVITY_ALERT = 'ACTIVITY_ALERT';
+
+export function $alert(type, title, content) {
+  Logger.debug('$alert', title, content);
+
+  // Alert.alert(({
+  //   title,
+  //   content,
+  // });
+
+  return {
+    type: ACTIVITY_ALERT,
+    params: {
+      title,
+      content,
+    },
+  };
+}
+
+const CONFIRM_TYPE = {
+  default: 'primary',
+  critical: 'danger',
+};
+
+let alertReference;
+
+const ACTIVITY_CONFIRM = 'ACTIVITY_CONFIRM';
+
+export function $confirm(title, content, options = {}) {
+  options.actionType = CONFIRM_TYPE[options.actionType] || CONFIRM_TYPE.default;
+  options.actionLabel = options.actionLabel || 'Confirm';
+
+  Logger.debug('$confim', title, content, options);
+
+  return (dispatch) => {
+    dispatch({
+      type: ACTIVITY_CONFIRM,
+      params: {
+        title,
+        content,
+      },
+    });
+
+    if (alertReference) {
+      alertReference.destroy();
+    }
+
+    return new Promise((resolve, reject) => {
+      // alertReference = Modal.confirm({
+      //   title,
+      //   content,
+      //   okType: options.actionType,
+      //   okText: options.actionLabel,
+      //   onOk() {
+      //     alertReference = null;
+      //     resolve(true);
+      //   },
+      //   onCancel() {
+      //     alertReference = null;
+      //     resolve(false);
+      //   },
+      // });
+    });
+  };
+}
+
+/**
  * Reducer
  */
 

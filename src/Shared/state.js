@@ -24,7 +24,7 @@ export function $initialize() {
     //   dispatch($loadSomething()),
     // ]);
 
-    await new Promise((resolve) => setTimeout(resolve, 2000));
+    await new Promise((resolve) => setTimeout(resolve, 3000));
 
     dispatch({
       type: SHARED_INITIALIZED,
