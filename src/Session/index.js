@@ -142,7 +142,7 @@ class Session extends Component {
 
         <main className="-fill-height -x-relative">
           <Switch>
-            <Route exact path="/home" component={HomeRouter} />
+            <Route path="/home" component={HomeRouter} />
             <Route exact path="/profile" component={ProfileView} />
             <Redirect exact from="/*" to="/home" />
           </Switch>

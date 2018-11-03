@@ -7,7 +7,7 @@ import HomeView from './HomeView';
 function Home() {
   return (
     <Switch>
-      <Route exact path="/" component={HomeView} />
+      <Route exact path="/home" component={HomeView} />
     </Switch>
   );
 }

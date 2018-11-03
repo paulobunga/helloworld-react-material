@@ -30,14 +30,13 @@ class ProfileView extends Component {
   render() {
     const { user, processing } = this.props;
 
-    return <div />;
+    return <div>Profile ... </div>;
   }
 }
 
 const WrappedProfileView = Wrapper(ProfileView);
 
 WrappedProfileView.propTypes = {
-  navigation: PropTypes.navigation.isRequired,
 };
 
 ProfileView.propTypes = {

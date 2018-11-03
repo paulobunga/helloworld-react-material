@@ -9,27 +9,11 @@ export * from 'prop-types';
 // export const { style } = ViewPropTypes;
 
 /**
- * react-navigation
+ * react-router
  */
 
-export const navigation = PropTypes.shape({
-  navigate: PropTypes.func,
-  goBack: PropTypes.func,
-  addListener: PropTypes.func,
-  isFocused: PropTypes.func,
-  // state: PropTypes.object,
-  state: PropTypes.shape({
-    routeName: PropTypes.string,
-    key: PropTypes.string,
-    params: PropTypes.object,
-  }),
-  setParams: PropTypes.func,
-  getParam: PropTypes.func,
-  dispatch: PropTypes.func,
-  push: PropTypes.func,
-  pop: PropTypes.func,
-  popToTop: PropTypes.func,
-  replace: PropTypes.func,
+export const router = PropTypes.shape({
+  // ...
 });
 
 /**
