@@ -239,7 +239,7 @@ export async function initializer({ dispatch, getState }) {
   await AuthService.initialize();
 
   if (AuthService.isAuthenticated()) {
-    // dispatch($initialize()).catch((error) => dispatch(Activity.$toast('failure', error.message)));
+    dispatch($initialize()).catch((error) => dispatch(Activity.$toast('failure', error.message)));
   } else if (getState().Auth.authenticated) {
     dispatch({
       type: AUTH_LOGOUT,

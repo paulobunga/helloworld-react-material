@@ -6,8 +6,6 @@ import { connect } from 'react-redux';
 
 import { Button, TextField } from '@material-ui/core';
 
-import * as $validate from '../common/validate';
-
 import { $login } from '../Auth/state';
 
 const withStore = connect((state) => ({
@@ -20,8 +18,8 @@ const Connector = (C) => withStore(C);
 // eslint-disable-next-line
 class LoginView extends Component {
   state = {
-    username: process.env.NODE_ENV === 'development' ? 'test@example.com' : '',
-    password: process.env.NODE_ENV === 'development' ? 'test' : '',
+    username: '',
+    password: '',
     error: {
       username: null,
       password: null,
@@ -36,19 +34,7 @@ class LoginView extends Component {
 
   handleInputChange(event) {
     this.setState({
-      [event.target.id]: event.target.value,
-    });
-  }
-
-  handleInputValidation(value, key, rules) {
-    $validate.exec(value, rules, (error) => {
-      const _error = {
-        [key]: error,
-      };
-
-      this.setState({
-        error: { ...this.state.error, ..._error },
-      });
+      [event.target.name]: event.target.value,
     });
   }
 
@@ -61,28 +47,24 @@ class LoginView extends Component {
         <form style={{ display: 'flex', flexWrap: 'wrap', flexDirection: 'column' }}>
           <TextField
             label="Email"
-            id="username"
+            name="username"
             autoComplete="current-username"
             margin="dense"
             value={username}
             error={!!error.username}
             helperText={error.username}
-            onBlur={(event) => this.handleInputValidation(event.target.value, event.target.id, [$validate.required, $validate.email])
-            }
             onChange={(event) => this.handleInputChange(event)}
           />
 
           <TextField
             label="Password"
             type="password"
-            id="password"
+            name="password"
             autoComplete="current-password"
             margin="dense"
             value={password}
             error={!!error.password}
             helperText={error.password}
-            onBlur={(event) => this.handleInputValidation(event.target.value, event.target.id, [$validate.required, $validate.password])
-            }
             onChange={(event) => this.handleInputChange(event)}
           />
         </form>

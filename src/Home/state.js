@@ -16,7 +16,7 @@ export const MODULE = 'Home';
  */
 
 const INITIAL_STATE = {
-  data: null,
+  tasks: null,
 };
 
 /**
@@ -37,53 +37,53 @@ export function $reset() {
 
 /* Fetch Data - Action types and internal action creators */
 
-const HOME_DATA_REQUEST = 'HOME_DATA_REQUEST';
+const HOME_TASK_INDEX_REQUEST = 'HOME_TASK_INDEX_REQUEST';
 
-const fetchDataRequest = StateHelper.createRequestAction(HOME_DATA_REQUEST);
+const fetchTaskIndexRequest = StateHelper.createRequestAction(HOME_TASK_INDEX_REQUEST);
 
-const HOME_DATA_SUCCESS = 'HOME_DATA_SUCCESS';
+const HOME_TASK_INDEX_SUCCESS = 'HOME_TASK_INDEX_SUCCESS';
 
 // Success action creator, must dispatch success and return value to pass to view layer via exposed action creator
-const fetchDataSuccess = StateHelper.createSuccessAction(HOME_DATA_SUCCESS);
+const fetchTaskIndexSuccess = StateHelper.createSuccessAction(HOME_TASK_INDEX_SUCCESS);
 
 // // Success action creator simplest implementation
-// function fetchDataSuccess({ data }) {
+// function fetchTaskIndexSuccess({ tasks }) {
 //   return {
-//     type: HOME_DATA_SUCCESS,
-//     data,
+//     type: HOME_TASK_INDEX_SUCCESS,
+//     tasks,
 //   };
 // }
 
-// // Success action creator with fine tuning for view data
-// function fetchDataSuccess({ data }) {
+// // Success action creator with fine tuning for view tasks
+// function fetchTaskIndexSuccess({ tasks }) {
 //   return (dispatch) => {
 //     dispatch({
-//       type: HOME_DATA_SUCCESS,
-//       data,
+//       type: HOME_TASK_INDEX_SUCCESS,
+//       tasks,
 //     });
 //
 //     return {
 //       accounts: {
-//         totalCount: data.accounts.length,
-//         enabled: data.accounts.filter(r => r.enabled)
-//         disabled: data.accounts.filter(r => !r.enabled)
+//         tasksCount: tasks.length,
+//         done: tasks.filter(r => r.done)
+//         unndone: tasks.filter(r => !r.done)
 //       },
 //     };
 //   };
 // }
 
-const HOME_DATA_FAILURE = 'HOME_DATA_FAILURE';
+const HOME_TASK_INDEX_FAILURE = 'HOME_TASK_INDEX_FAILURE';
 
 // Failure action creator must dispatch failure and throw an error
-const fetchDataFailure = StateHelper.createFailureAction(HOME_DATA_FAILURE);
+const fetchTaskIndexFailure = StateHelper.createFailureAction(HOME_TASK_INDEX_FAILURE);
 
 /* Fetch Data - Exposed action creators, must return a promise */
 
 // Promise implementation
-export function $fetchDataPromise() {
+export function $fetchTaskIndexPromise() {
   return (dispatch) => {
-    dispatch(Activity.$processing(MODULE, $fetchDataPromise.name));
-    dispatch(fetchDataRequest());
+    dispatch(Activity.$processing(MODULE, $fetchTaskIndexPromise.name));
+    dispatch(fetchTaskIndexRequest());
 
     return fetch(`${API_ENDPOINT}/task/index`, {
       headers: {
@@ -91,17 +91,17 @@ export function $fetchDataPromise() {
       },
     })
       .then(FetchHelper.ResponseHandler, FetchHelper.ErrorHandler)
-      .then((result) => dispatch(fetchDataSuccess({ data: result })))
-      .catch((error) => dispatch(fetchDataFailure(error)))
-      .finally(() => dispatch(Activity.$done(MODULE, $fetchDataPromise.name)));
+      .then((result) => dispatch(fetchTaskIndexSuccess({ tasks: result })))
+      .catch((error) => dispatch(fetchTaskIndexFailure(error)))
+      .finally(() => dispatch(Activity.$done(MODULE, $fetchTaskIndexPromise.name)));
   };
 }
 
 // async/await implementation
-export function $fetchData() {
+export function $fetchTaskIndex() {
   return async (dispatch) => {
-    dispatch(Activity.$processing(MODULE, $fetchData.name));
-    dispatch(fetchDataRequest());
+    dispatch(Activity.$processing(MODULE, $fetchTaskIndex.name));
+    dispatch(fetchTaskIndexRequest());
 
     try {
       const response = await fetch(`${API_ENDPOINT}/task/index`, {
@@ -111,12 +111,12 @@ export function $fetchData() {
       });
       const result = await FetchHelper.ResponseHandler(response);
 
-      return dispatch(fetchDataSuccess({ data: result }));
+      return dispatch(fetchTaskIndexSuccess({ tasks: result }));
     } catch (error) {
       await FetchHelper.ErrorValueHandler(error);
-      dispatch(fetchDataFailure(error));
+      dispatch(fetchTaskIndexFailure(error));
     } finally {
-      dispatch(Activity.$done(MODULE, $fetchData.name));
+      dispatch(Activity.$done(MODULE, $fetchTaskIndex.name));
     }
   };
 }
@@ -130,20 +130,20 @@ export function reducer(state = INITIAL_STATE, action) {
     case HOME_RESET:
     case AUTH_LOGOUT:
       return INITIAL_STATE;
-    case HOME_DATA_REQUEST:
+    case HOME_TASK_INDEX_REQUEST:
       return {
         ...state,
-        data: null,
+        tasks: null,
       };
-    case HOME_DATA_SUCCESS:
+    case HOME_TASK_INDEX_SUCCESS:
       return {
         ...state,
-        data: action.data,
+        tasks: action.tasks,
       };
-    case HOME_DATA_FAILURE:
+    case HOME_TASK_INDEX_FAILURE:
       return {
         ...state,
-        data: null,
+        tasks: null,
       };
     default:
       return state;
@@ -154,8 +154,8 @@ export function reducer(state = INITIAL_STATE, action) {
  * Persister
  */
 
-export function persister({ data }) {
+export function persister({ tasks }) {
   return {
-    data,
+    tasks,
   };
 }
