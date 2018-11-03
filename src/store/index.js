@@ -1,3 +1,9 @@
+/**
+ * Store
+ *
+ * This module is for state store definition
+ */
+
 import {
   combineReducers, createStore, applyMiddleware, compose,
 } from 'redux';

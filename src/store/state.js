@@ -1,3 +1,9 @@
+/**
+ * State
+ *
+ * This module is for state definition
+ */
+
 import * as Activity from '../Shared/Activity.state';
 import * as Shared from '../Shared/state';
 import * as Auth from '../Auth/state';
