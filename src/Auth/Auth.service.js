@@ -79,8 +79,8 @@ export const AuthServiceImplementation = class AuthService {
       });
   }
 
-  initiateAccountRecovery(email) {
-    return fetch(`${API_ENDPOINT}/auth/recovery/initiate`, {
+  initiatePasswordReset(email) {
+    return fetch(`${API_ENDPOINT}/auth/password-reset/initiate`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
