@@ -85,7 +85,7 @@ export function $fetchTaskIndexPromise() {
     dispatch(Activity.$processing(MODULE, $fetchTaskIndexPromise.name));
     dispatch(fetchTaskIndexRequest());
 
-    return fetch(`${API_ENDPOINT}/task/index`, {
+    return fetch(`${API_ENDPOINT}/task`, {
       headers: {
         Authorization: `Bearer ${AuthService.token}`,
       },
@@ -104,7 +104,7 @@ export function $fetchTaskIndex() {
     dispatch(fetchTaskIndexRequest());
 
     try {
-      const response = await fetch(`${API_ENDPOINT}/task/index`, {
+      const response = await fetch(`${API_ENDPOINT}/task`, {
         headers: {
           Authorization: `Bearer ${AuthService.token}`,
         },
