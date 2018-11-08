@@ -1,1 +1,1 @@
-export * from 'emiketic-starter-lib/dist/common/events';
+export * from 'starter-lib/dist/common/events';

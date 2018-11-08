@@ -1,1 +1,1 @@
-export * from 'emiketic-starter-lib/dist/common/logger';
+export * from 'starter-lib/dist/common/logger';
