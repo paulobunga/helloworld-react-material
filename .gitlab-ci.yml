@@ -54,6 +54,7 @@ build:
   tags:
     - docker
   script:
+    - export CI=
     - yarn build
   artifacts:
     paths:
