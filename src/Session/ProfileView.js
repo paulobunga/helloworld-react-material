@@ -36,8 +36,7 @@ class ProfileView extends Component {
 
 const WrappedProfileView = Wrapper(ProfileView);
 
-WrappedProfileView.propTypes = {
-};
+WrappedProfileView.propTypes = {};
 
 ProfileView.propTypes = {
   ...WrappedProfileView.propTypes,

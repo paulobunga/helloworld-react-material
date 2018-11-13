@@ -3,13 +3,13 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
-    "@material-ui/core": "3.4.0",
+    "@material-ui/core": "3.5.1",
     "@material-ui/icons": "3.0.1",
     "promise.prototype.finally": "3.1.0",
     "prop-types": "15.6.2",
-    "react": "16.6.1",
-    "react-dom": "16.6.1",
-    "react-redux": "5.1.0",
+    "react": "16.6.3",
+    "react-dom": "16.6.3",
+    "react-redux": "5.1.1",
     "react-router-dom": "4.3.1",
     "react-scripts": "2.1.1",
     "redux": "4.0.1",
@@ -30,11 +30,11 @@
   },
   "devDependencies": {
     "babel-eslint": "10.0.1",
-    "eslint": "5.8.0",
+    "eslint": "5.9.0",
     "eslint-config-airbnb": "17.1.0",
     "eslint-plugin-import": "2.14.0",
     "eslint-plugin-jsx-a11y": "6.1.2",
     "eslint-plugin-react": "7.11.1",
-    "prettier": "1.15.1"
+    "prettier": "1.15.2"
   }
 }
