@@ -17,16 +17,16 @@ install:
   tags:
     - docker
   script:
-    - yarn
+    - npm install
 
 lint:
   stage: test
   tags:
     - docker
   before_script:
-    - yarn install
+    - npm install
   script:
-    - yarn lint
+    - npm run lint
   allow_failure: true
 
 lint-critical:
@@ -34,9 +34,9 @@ lint-critical:
   tags:
     - docker
   before_script:
-    - yarn install
+    - npm install
   script:
-    - yarn lint:critical
+    - npm run lint:critical
   # allow_failure: true
 
 test:
@@ -44,9 +44,9 @@ test:
   tags:
     - docker
   before_script:
-    - yarn install
+    - npm install
   script:
-    - yarn test
+    - npm run test
   allow_failure: true
 
 build:
@@ -55,7 +55,7 @@ build:
     - docker
   script:
     - export CI=
-    - yarn build
+    - npm run build
   artifacts:
     paths:
       - ./build/

@@ -22,25 +22,25 @@ A boilerplate and reference implementation for web applications built with React
 
 ```sh
 # install dependencies
-yarn install
+npm install
 
 # run app in development on port 3000
-yarn start
+npm start
 
 # run tests
-yarn test
+npm run test
 
 # build for production
-yarn run build
+npm run run build
 
 # lint code for critical issues
-yarn lint:critical
+npm run lint:critical
 
 # lint code
-yarn lint
+npm run lint
 
 # format code
-yarn format
+npm run format
 ```
 
 ## Debugging
