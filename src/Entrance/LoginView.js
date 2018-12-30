@@ -12,10 +12,8 @@ const withStore = connect((state) => ({
   processing: state.Activity.processingByTopic['Auth.$login'] || false,
 }));
 
-// provides route prcops and rerender on route change, provides shared state and actions as props;
-const Connector = (C) => withStore(C);
+const Wrapper = (C) => withStore(C);
 
-// eslint-disable-next-line
 class LoginView extends Component {
   state = {
     username: '',
@@ -28,7 +26,7 @@ class LoginView extends Component {
 
   login() {
     const { username, password } = this.state;
-    // eslint-disable-next-line
+
     return this.props.dispatch($login(username, password)).catch((error) => console.log('error.. ', error));
   }
 
@@ -96,4 +94,4 @@ LoginView.propTypes = {
   processing: PropTypes.bool.isRequired,
 };
 
-export default Connector(LoginView);
+export default Wrapper(LoginView);

@@ -6,19 +6,32 @@ import * as Logger from './logger';
 
 import * as CONFIG from './config';
 
+import * as INTL from './intl';
+
 if (process.env.NODE_ENV === 'development') {
   global.Logger = Logger;
   global.CONFIG = CONFIG;
+  global.INTL = INTL;
 }
 
 /**
  * Setup Logger
  */
 
-const PREFIX = 'HelloWorld';
+const PREFIX = 'Starter';
 
 Logger.setup(PREFIX);
 
 if (process.env.NODE_ENV === 'development') {
   Logger.enable(`${PREFIX}*`);
 }
+
+Logger.enable(`${PREFIX}*`);
+
+/**
+ * Globals
+ */
+
+global.ENV = {
+  isMobile: window.innerWidth <= 767,
+};

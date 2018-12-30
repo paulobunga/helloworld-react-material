@@ -1,5 +1,9 @@
 import * as Logger from '../common/logger';
 
+/**
+ * Module Name
+ */
+
 export const MODULE = 'Activity';
 
 /**

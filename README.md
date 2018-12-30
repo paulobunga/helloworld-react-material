@@ -16,7 +16,7 @@ A boilerplate and reference implementation for web applications built with React
 
 ## Requirements
 
-- [Node.js v8+](https://nodejs.org/) + [Yarn](https://yarnpkg.com/)
+- [Node.js v8+](https://nodejs.org/)
 
 ## Usage
 
@@ -31,7 +31,7 @@ npm start
 npm run test
 
 # build for production
-npm run run build
+npm run build
 
 # lint code for critical issues
 npm run lint:critical

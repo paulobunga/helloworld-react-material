@@ -7,11 +7,11 @@ import { Button } from '@material-ui/core';
 
 const withStore = connect((state) => ({}));
 
-// provides route prcops and rerender on route change, provides shared state and actions as props;
-const Connector = (C) => withStore(C);
+const Wrapper = (C) => withStore(C);
 
-// eslint-disable-next-line
 class SignupView extends Component {
+  state = {};
+
   render() {
     return (
       <div>
@@ -28,4 +28,4 @@ class SignupView extends Component {
   }
 }
 
-export default Connector(SignupView);
+export default Wrapper(SignupView);

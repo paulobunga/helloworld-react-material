@@ -10,8 +10,9 @@ import ResetView from './ResetView';
 
 import LOGO from '../assets/logo.png';
 
-// eslint-disable-next-line
 class Entrance extends Component {
+  state = {};
+
   render() {
     return (
       <div style={{ backgroundColor: `${COLOR.primary}` }} className="-x-fit">
