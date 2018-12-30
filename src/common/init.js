@@ -25,13 +25,3 @@ Logger.setup(PREFIX);
 if (process.env.NODE_ENV === 'development') {
   Logger.enable(`${PREFIX}*`);
 }
-
-Logger.enable(`${PREFIX}*`);
-
-/**
- * Globals
- */
-
-global.ENV = {
-  isMobile: window.innerWidth <= 767,
-};

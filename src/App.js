@@ -11,8 +11,15 @@ import Session from './Session';
 
 const withStore = connect((state) => ({
   ready: state.Shared.ready,
+  initialized: state.Shared.initialized,
   authenticated: state.Auth.authenticated,
 }));
+
+const propTypes = {
+  ready: PropTypes.bool.isRequired,
+  initialized: PropTypes.bool.isRequired,
+  authenticated: PropTypes.bool.isRequired,
+};
 
 const Wrapper = (C) => withRouter(withStore(C));
 
@@ -20,9 +27,9 @@ class App extends Component {
   state = {};
 
   render() {
-    const { ready, authenticated } = this.props;
+    const { ready, initialized, authenticated } = this.props;
 
-    if (!ready) {
+    if (!ready || (authenticated && !initialized)) {
       return <LandingView />;
     }
 
@@ -30,9 +37,6 @@ class App extends Component {
   }
 }
 
-App.propTypes = {
-  ready: PropTypes.bool.isRequired,
-  authenticated: PropTypes.bool.isRequired,
-};
+App.propTypes = propTypes;
 
 export default Wrapper(App);
