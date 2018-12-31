@@ -1,17 +1,14 @@
-/**
- * VALIDATION RULES
- */
+export * from 'starter-lib/dist/common/validate';
 
-export const exec = (value, rules, cb) => {
+export function exec(value, rules) {
   let _error = [];
   rules.forEach((rule) => {
     if (rule(value) === true) {
       return;
     }
     _error = [..._error, rule(value)];
-    // _error = [..._error, new Error(rule(value))];
   });
-  cb(_error.length ? _error : null);
+  return _error.length ? _error : null;
 };
 
 export const PASSWORD_LENGTH = 8;

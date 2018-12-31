@@ -105,16 +105,20 @@ export function reducer(state = INITIAL_STATE, action) {
         user: null,
       };
     case login.SUCCESS:
-      return {
-        ...state,
-        authenticated: true,
-        user: action.user,
-      };
     case signup.SUCCESS:
+      const initials = action.user.name
+        .split(/\W+/)
+        .map((w) => w[0] || '')
+        .join('')
+        .toUpperCase();
+
       return {
         ...state,
         authenticated: true,
-        user: action.user,
+        user: {
+          ...action.user,
+          initials,
+        },
       };
     case logout.TYPE:
       return {
@@ -126,6 +130,10 @@ export function reducer(state = INITIAL_STATE, action) {
       return state;
   }
 }
+
+/**
+ * Persister
+ */
 
 export function persister({ authenticated, user }) {
   return {

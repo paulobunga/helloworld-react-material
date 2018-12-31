@@ -16,7 +16,7 @@
     "redux-localstorage": "1.0.0-rc5",
     "redux-logger": "~3.0.6",
     "redux-thunk": "~2.3.0",
-    "starter-lib": "git+https://github.com/emiketic/emiketic-starter-lib.git#0.4.0"
+    "starter-lib": "git+https://github.com/emiketic/emiketic-starter-lib.git#0.5.0"
   },
   "scripts": {
     "start": "react-scripts start",

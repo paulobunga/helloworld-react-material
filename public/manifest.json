@@ -1,7 +1,7 @@
 {
   "name": "Hello World",
   "short_name": "Hello World",
-  "description": "Some slogan here!",
+  "description": "...",
   "start_url": "./index.html",
   "display": "standalone",
   "background_color": "#FFFFFF",
