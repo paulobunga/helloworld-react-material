@@ -1,7 +1,21 @@
 {
+  "private": true,
   "name": "starter-react",
   "version": "0.1.0",
-  "private": true,
+  "engines": {
+    "node": "^10.0.0",
+    "npm": "^6.0.0"
+  },
+  "scripts": {
+    "start": "react-scripts start",
+    "lint": "eslint --ext .js ./",
+    "lint:critical": "eslint --no-eslintrc --config .eslintrc.critical.json ./",
+    "format": "npm run format:all && npm run format:js",
+    "format:all": "prettier --ignore-path .gitignore ./**/*.{md,json,js,css,scss} --write",
+    "format:js": "eslint -o /dev/null --ignore-path .gitignore --ext .js --fix ./ || true",
+    "test": "react-scripts test --env=jsdom --setupTestFrameworkScriptFile ./jest.setup.js",
+    "build": "react-scripts build "
+  },
   "dependencies": {
     "@material-ui/core": "~3.8.1",
     "@material-ui/icons": "3.0.1",
@@ -17,16 +31,6 @@
     "redux-logger": "~3.0.6",
     "redux-thunk": "~2.3.0",
     "starter-lib": "git+https://github.com/emiketic/emiketic-starter-lib.git#0.5.4"
-  },
-  "scripts": {
-    "start": "react-scripts start",
-    "lint": "eslint --ext .js ./",
-    "lint:critical": "eslint --no-eslintrc --config .eslintrc.critical.json ./",
-    "format": "npm run format:all && npm run format:js",
-    "format:all": "prettier --ignore-path .gitignore ./**/*.{md,json,js,css,scss} --write",
-    "format:js": "eslint -o /dev/null --ignore-path .gitignore --ext .js --fix ./ || true",
-    "test": "react-scripts test --env=jsdom --setupTestFrameworkScriptFile ./jest.setup.js",
-    "build": "react-scripts build "
   },
   "devDependencies": {
     "babel-eslint": "10.0.1",
