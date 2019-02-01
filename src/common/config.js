@@ -1,6 +1,6 @@
 import { debug } from './logger';
 
-export { RELEASE_VERSION, RELEASE_CODENAME, RELEASE_DATE } from './release';
+export { RELEASE_VERSION } from './release';
 
 const CONFIG_OVERRIDE = {};
 
