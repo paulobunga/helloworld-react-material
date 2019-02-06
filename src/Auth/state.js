@@ -35,13 +35,13 @@ const login = StateHelper.createAsyncOperation(MODULE, 'login');
 
 export function $login(username, password) {
   return (dispatch) => {
-    dispatch(Activity.$processing(MODULE, $login.name, { message: 'Logging in ...' }));
+    dispatch(Activity.$processing(MODULE, login.name, { message: 'Logging in ...' }));
     dispatch(login.request());
 
     return AuthService.login(username, password)
       .then((result) => dispatch(login.success(result)))
       .catch((error) => dispatch(login.failure(error)))
-      .finally(() => dispatch(Activity.$done(MODULE, $login.name)));
+      .finally(() => dispatch(Activity.$done(MODULE, login.name)));
   };
 }
 
@@ -65,13 +65,13 @@ const signup = StateHelper.createAsyncOperation(MODULE, 'signup');
 
 export function $signup(payload) {
   return async (dispatch) => {
-    dispatch(Activity.$processing(MODULE, $signup.name, { message: 'Signing up ...' }));
+    dispatch(Activity.$processing(MODULE, signup.name, { message: 'Signing up ...' }));
     dispatch(signup.request());
 
     return AuthService.signup(payload)
       .then((result) => dispatch(signup.success(result)))
       .catch((error) => dispatch(signup.failure(error)))
-      .finally(() => dispatch(Activity.$done(MODULE, $signup.name)));
+      .finally(() => dispatch(Activity.$done(MODULE, signup.name)));
   };
 }
 
@@ -83,13 +83,13 @@ const initiatePasswordReset = StateHelper.createAsyncOperation(MODULE, 'initiate
 
 export function $initiatePasswordReset(email) {
   return (dispatch) => {
-    dispatch(Activity.$processing(MODULE, $initiatePasswordReset.name, { message: 'Password Reset ...' }));
+    dispatch(Activity.$processing(MODULE, initiatePasswordReset.name, { message: 'Password Reset ...' }));
     dispatch(initiatePasswordReset.request());
 
     return AuthService.initiatePasswordReset(email)
       .then((result) => dispatch(initiatePasswordReset.success(result)))
       .catch((error) => dispatch(initiatePasswordReset.failure(error)))
-      .finally(() => dispatch(Activity.$done(MODULE, $initiatePasswordReset.name)));
+      .finally(() => dispatch(Activity.$done(MODULE, initiatePasswordReset.name)));
   };
 }
 
