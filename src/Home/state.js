@@ -5,7 +5,7 @@ import * as StateHelper from '../common/state.helper';
 
 import { AuthService } from '../Auth/Auth.service';
 
-import * as Activity from '../Shared/Activity.state';
+import * as Activity from '../Shared/Activity.service';
 
 /**
  * Module Name
@@ -38,7 +38,7 @@ const fetchIndex = StateHelper.createAsyncOperation(MODULE, 'fetchIndex');
 // Promise implementation
 export function $fetchIndexPromise() {
   return (dispatch) => {
-    dispatch(Activity.$processing(MODULE, fetchIndex.name));
+    Activity.processing(MODULE, fetchIndex.name);
     dispatch(fetchIndex.request());
 
     return fetch(`${API_ENDPOINT}/task`, {
@@ -49,14 +49,14 @@ export function $fetchIndexPromise() {
       .then(FetchHelper.ResponseHandler, FetchHelper.ErrorHandler)
       .then((result) => dispatch(fetchIndex.success(result)))
       .catch((error) => dispatch(fetchIndex.failure(error)))
-      .finally(() => dispatch(Activity.$done(MODULE, fetchIndex.name)));
+      .finally(() => Activity.done(MODULE, fetchIndex.name));
   };
 }
 
 // async/await implementation
 export function $fetchIndex() {
   return async (dispatch) => {
-    dispatch(Activity.$processing(MODULE, fetchIndex.name));
+    Activity.processing(MODULE, fetchIndex.name);
     dispatch(fetchIndex.request());
 
     try {
@@ -72,7 +72,7 @@ export function $fetchIndex() {
       await FetchHelper.ErrorValueHandler(error);
       dispatch(fetchIndex.failure(error));
     } finally {
-      dispatch(Activity.$done(MODULE, fetchIndex.name));
+      Activity.done(MODULE, fetchIndex.name);
     }
   };
 }

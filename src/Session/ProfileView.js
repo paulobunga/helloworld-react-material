@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 
 import * as PropTypes from '../common/proptypes';
 
-// import * as Activity from '../Shared/Activity.state';
+import * as Activity from '../Shared/Activity.service';
 
 // import { $fetchProfile } from '../Auth/state';
 
@@ -22,9 +22,9 @@ const Wrapper = (C) => withStore(C);
 
 class ProfileView extends Component {
   componentDidMount() {
-    // this.props
-    //   .dispatch($fetchProfile())
-    //   .catch((error) => this.props.dispatch(Activity.$toast('failure', error.message)));
+    const { dispatch } = this.props;
+
+    // dispatch($fetchProfile()).catch((error) => Activity.toast('failure', error.message));
   }
 
   render() {

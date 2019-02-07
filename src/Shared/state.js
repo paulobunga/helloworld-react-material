@@ -7,7 +7,7 @@ import { AuthService } from '../Auth/Auth.service';
 
 import * as Auth from '../Auth/state';
 
-import * as Activity from './Activity.state';
+import * as Activity from './Activity.service';
 
 /**
  * Module Name
@@ -117,11 +117,11 @@ export async function initializer({ dispatch, getState }) {
   dispatch($ready());
 
   if (AuthService.isAuthenticated()) {
-    dispatch($initialize()).catch((error) => dispatch(Activity.$toast('failure', error.message)));
+    dispatch($initialize()).catch((error) => Activity.toast('failure', error.message));
   }
 
   AuthService.events.on('login', () => {
-    dispatch($initialize()).catch((error) => dispatch(Activity.$toast('failure', error.message)));
+    dispatch($initialize()).catch((error) => Activity.toast('failure', error.message));
   });
 
   AuthService.events.on('logout', () => {

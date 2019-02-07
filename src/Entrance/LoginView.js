@@ -6,10 +6,12 @@ import { connect } from 'react-redux';
 
 import { Button, TextField } from '@material-ui/core';
 
+import * as Activity from '../Shared/Activity.service';
+
 import { $login } from '../Auth/state';
 
 const withStore = connect((state) => ({
-  processing: state.Activity.processingByTopic['Auth.$login'] || false,
+  processing: state.Activity.processingByOperation['Auth.$login'] || false,
 }));
 
 const Wrapper = (C) => withStore(C);
@@ -25,9 +27,9 @@ class LoginView extends Component {
   };
 
   login() {
-    const { username, password } = this.state;
+    const { dispatch } = this.props;
 
-    return this.props.dispatch($login(username, password)).catch((error) => console.log('error.. ', error));
+    dispatch($login(this.state.username, this.state.password)).catch((error) => Activity.toast('failure', error.message));
   }
 
   handleInputChange(event) {
