@@ -53,7 +53,8 @@ const logout = StateHelper.createSimpleOperation(MODULE, 'logout');
 
 export function $logout() {
   return (dispatch) => {
-    return AuthService.logout().then(() => dispatch(logout.action()));
+    dispatch(logout.action());
+    return AuthService.logout();
   };
 }
 
