@@ -1,1 +1,1 @@
-export * from 'starter-lib/dist/common/const';
+export * from 'starter-lib/src/common/const';

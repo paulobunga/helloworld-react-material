@@ -1,1 +1,1 @@
-export * from 'starter-lib/dist/common/error';
+export * from 'starter-lib/src/common/error';

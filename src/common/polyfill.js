@@ -1,1 +1,1 @@
-export * from 'starter-lib/dist/browser/polyfill';
+export * from 'starter-lib/src/browser/polyfill';

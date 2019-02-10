@@ -1,4 +1,4 @@
-export * from 'starter-lib/dist/common/validate';
+export * from 'starter-lib/src/common/validate';
 
 export function exec(value, rules) {
   let _error = [];

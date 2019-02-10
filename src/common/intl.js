@@ -1,1 +1,1 @@
-export * from 'starter-lib/dist/common/intl';
+export * from 'starter-lib/src/common/intl';

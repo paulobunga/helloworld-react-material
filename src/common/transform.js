@@ -1,1 +1,1 @@
-export * from 'starter-lib/dist/common/transform';
+export * from 'starter-lib/src/common/transform';

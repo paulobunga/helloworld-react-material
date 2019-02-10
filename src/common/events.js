@@ -1,1 +1,1 @@
-export * from 'starter-lib/dist/common/events';
+export * from 'starter-lib/src/common/events';

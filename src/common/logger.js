@@ -1,1 +1,1 @@
-export * from 'starter-lib/dist/common/logger';
+export * from 'starter-lib/src/common/logger';

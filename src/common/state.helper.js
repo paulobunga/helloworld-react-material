@@ -1,1 +1,1 @@
-export * from 'starter-lib/dist/redux/state.helper';
+export * from 'starter-lib/src/redux/state.helper';

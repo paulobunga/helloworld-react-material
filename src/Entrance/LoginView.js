@@ -53,7 +53,7 @@ class LoginView extends Component {
             value={username}
             error={!!error.username}
             helperText={error.username}
-            onChange={(event) => this.handleInputChange(event)}
+            onChange={(e) => this.handleInputChange(e)}
           />
 
           <TextField
@@ -65,7 +65,7 @@ class LoginView extends Component {
             value={password}
             error={!!error.password}
             helperText={error.password}
-            onChange={(event) => this.handleInputChange(event)}
+            onChange={(e) => this.handleInputChange(e)}
           />
         </form>
 

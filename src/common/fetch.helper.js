@@ -1,1 +1,1 @@
-export * from 'starter-lib/dist/common/fetch.helper';
+export * from 'starter-lib/src/common/fetch.helper';

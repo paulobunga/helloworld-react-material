@@ -7,7 +7,8 @@
     "npm": "^5.0.0 || ^6.0.0"
   },
   "scripts": {
-    "start": "react-scripts start",
+    "start": "npm run dev",
+    "dev": "react-scripts start",
     "lint": "eslint --ext .js ./",
     "lint:critical": "eslint --no-eslintrc --config .eslintrc.critical.json ./",
     "format": "npm run format:all && npm run format:js",
@@ -30,7 +31,7 @@
     "redux-localstorage": "1.0.0-rc5",
     "redux-logger": "~3.0.6",
     "redux-thunk": "~2.3.0",
-    "starter-lib": "git+https://github.com/emiketic/emiketic-starter-lib.git#0.6.0"
+    "starter-lib": "git+https://github.com/emiketic/emiketic-starter-lib.git#0.7.0"
   },
   "devDependencies": {
     "babel-eslint": "10.0.1",
