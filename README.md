@@ -1,6 +1,13 @@
-# React Starter
+# Starter Webapp (React/Redux with Material Design)
 
 A boilerplate and reference implementation for web applications built with React, Redux, and React Material.
+
+## Preview
+
+- http://react.starter.emiketic.com
+- Access credentials:
+  - email: `client@starter.emiketic.com`
+  - password: `password`
 
 ## References
 

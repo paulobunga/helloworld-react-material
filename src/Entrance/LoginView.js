@@ -11,7 +11,7 @@ import * as Activity from '../Shared/Activity.service';
 import { $login } from '../Auth/state';
 
 const withStore = connect((state) => ({
-  processing: state.Activity.processingByOperation['Auth.$login'] || false,
+  processing: state.Activity.processingByOperation['Auth.login'] || false,
 }));
 
 const Wrapper = (C) => withStore(C);
