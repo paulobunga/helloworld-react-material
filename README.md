@@ -1,5 +1,7 @@
 # Starter Webapp (React/Redux with Material Design)
 
+![](https://img.shields.io/david/emiketic/emiketic-starter-react.svg?style=for-the-badge)
+
 A boilerplate and reference implementation for web applications built with React, Redux, and React Material.
 
 ## Preview
