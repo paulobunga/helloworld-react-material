@@ -35,18 +35,18 @@ export function $reset() {
 
 const processing = StateHelper.createSimpleOperation(MODULE, 'processing');
 
-export function $processing(topic) {
-  Logger.debug('$processing', topic);
+export function $processing(operation) {
+  Logger.debug('$processing', operation);
 
-  return processing.action({ topic });
+  return processing.action({ operation });
 }
 
 const done = StateHelper.createSimpleOperation(MODULE, 'done');
 
-export function $done(topic) {
-  Logger.debug('$done', topic);
+export function $done(operation) {
+  Logger.debug('$done', operation);
 
-  return done.action({ topic });
+  return done.action({ operation });
 }
 
 /**
@@ -60,7 +60,7 @@ export function reducer(state = INITIAL_STATE(), action) {
     case processing.TYPE: {
       const processingByOperation = {
         ...state.processingByOperation,
-        [action.topic]: true,
+        [action.operation]: true,
       };
       return {
         ...state,
@@ -71,7 +71,7 @@ export function reducer(state = INITIAL_STATE(), action) {
     case done.TYPE: {
       const processingByOperation = {
         ...state.processingByOperation,
-        [action.topic]: false,
+        [action.operation]: false,
       };
       return {
         ...state,
