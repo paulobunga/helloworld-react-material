@@ -20,8 +20,8 @@ export const MODULE = 'Shared';
  */
 
 const INITIAL_STATE = {
-  ready: false,
-  initialized: false,
+  ready: false, // app ready
+  initialized: false, // session initialized
 };
 
 /**
@@ -39,7 +39,7 @@ export function $ready() {
 }
 
 /**
- * Initialize app
+ * Initialize session
  */
 
 const initialize = StateHelper.createSimpleOperation(MODULE, 'initialize');
@@ -58,7 +58,7 @@ export function $initialize() {
 }
 
 /**
- * Uninitialize app
+ * Uninitialize session
  */
 
 const uninitialize = StateHelper.createSimpleOperation(MODULE, 'uninitialize');
