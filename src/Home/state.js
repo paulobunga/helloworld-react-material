@@ -78,6 +78,86 @@ export function $fetchIndex() {
 }
 
 /**
+ * Create Task
+ */
+
+const createTask = StateHelper.createAsyncOperation(MODULE, 'createTask');
+
+export function $createTask(data) {
+  return (dispatch) => {
+    Activity.processing(MODULE, createTask.name);
+    dispatch(createTask.request());
+    console.log(data, '++');
+
+    return fetch(`${API_ENDPOINT}/task/create`, {
+      method: 'POST',
+      headers: {
+        Authorization: `Bearer ${AuthService.getAccessToken()}`,
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        data,
+      }),
+    })
+      .then(FetchHelper.ResponseHandler, FetchHelper.ErrorHandler)
+      .then((result) => dispatch(createTask.success(result)))
+      .catch((error) => dispatch(createTask.failure(error)))
+      .finally(() => Activity.done(MODULE, createTask.name));
+  };
+}
+
+/**
+ * Update Task
+ */
+
+const updateTask = StateHelper.createAsyncOperation(MODULE, 'updateTask');
+
+export function $updateTask(taskId, data) {
+  return (dispatch) => {
+    Activity.processing(MODULE, updateTask.name);
+    dispatch(updateTask.request());
+
+    return fetch(`${API_ENDPOINT}/task/${taskId}/edit`, {
+      method: 'POST',
+      headers: {
+        Authorization: `Bearer ${AuthService.getAccessToken()}`,
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        data,
+      }),
+    })
+      .then(FetchHelper.ResponseHandler, FetchHelper.ErrorHandler)
+      .then((result) => dispatch(updateTask.success(result)))
+      .catch((error) => dispatch(updateTask.failure(error)))
+      .finally(() => Activity.done(MODULE, updateTask.name));
+  };
+}
+
+/**
+ * Remove Task
+ */
+const removeTask = StateHelper.createAsyncOperation(MODULE, 'removeTask');
+
+export function $removeTask(taskId) {
+  return (dispatch) => {
+    Activity.processing(MODULE, removeTask.name);
+    dispatch(removeTask.request());
+
+    return fetch(`${API_ENDPOINT}/task/${taskId}/delete`, {
+      method: 'POST',
+      headers: {
+        Authorization: `Bearer ${AuthService.getAccessToken()}`,
+      },
+    })
+      .then(FetchHelper.ResponseHandler, FetchHelper.ErrorHandler)
+      .then(() => dispatch($fetchIndex()))
+      .catch((error) => dispatch(removeTask.failure(error)))
+      .finally(() => Activity.done(MODULE, removeTask.name));
+  };
+}
+
+/**
  * Reducer
  */
 
@@ -94,6 +174,16 @@ export function reducer(state = INITIAL_STATE, action) {
       return {
         ...state,
         index: action.data,
+      };
+    case createTask.SUCCESS:
+      return {
+        ...state,
+        index: [...state.index, action.data],
+      };
+    case updateTask.SUCCESS:
+      return {
+        ...state,
+        index: state.index.map((item) => (action.data.id === item.id ? action.data : item)),
       };
     case fetchIndex.FAILURE:
       return {
