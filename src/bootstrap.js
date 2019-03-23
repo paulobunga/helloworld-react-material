@@ -29,7 +29,7 @@ export default async function bootstrap() {
     dispatch(Auth.$reset());
   }
 
-  dispatch(Shared.$readyApp());
+  dispatch(Shared.$appReady());
 
   if (AuthService.isAuthenticated()) {
     dispatch(Shared.$prepareSession()).catch((error) => Activity.toast('failure', error.message));

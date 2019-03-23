@@ -21,13 +21,13 @@ const INITIAL_STATE = {
  * Ready app
  */
 
-const readyApp = StateHelper.createSimpleOperation(MODULE, 'readyApp');
+const appReady = StateHelper.createSimpleOperation(MODULE, 'appReady');
 
-export function $readyApp() {
-  Logger.debug('$readyApp');
+export function $appReady() {
+  Logger.debug('$appReady');
 
   return async (dispatch) => {
-    dispatch(readyApp.action());
+    dispatch(appReady.action());
   };
 }
 
@@ -70,7 +70,7 @@ export function $clearSession() {
 
 export function reducer(state = INITIAL_STATE, action) {
   switch (action.type) {
-    case readyApp.TYPE:
+    case appReady.TYPE:
       return {
         ...state,
         appReady: true,
