@@ -11,7 +11,11 @@ import { theme } from './common/theme';
 
 import { setupStore } from './store';
 
+import bootstrap from './bootstrap';
+
 const store = setupStore();
+
+bootstrap();
 
 const AppContainer = () => (
   <MuiThemeProvider theme={theme}>

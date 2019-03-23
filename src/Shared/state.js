@@ -1,13 +1,6 @@
 import * as Logger from '../common/logger';
 
-import * as FetchHelper from '../common/fetch.helper';
 import * as StateHelper from '../common/state.helper';
-
-import { AuthService } from '../Auth/Auth.service';
-
-import * as Auth from '../Auth/state';
-
-import * as Activity from './Activity.service';
 
 /**
  * Module Name
@@ -20,32 +13,32 @@ export const MODULE = 'Shared';
  */
 
 const INITIAL_STATE = {
-  ready: false, // app ready
-  initialized: false, // session initialized
+  appReady: false,
+  sessionReady: false,
 };
 
 /**
  * Ready app
  */
 
-const ready = StateHelper.createSimpleOperation(MODULE, 'ready');
+const readyApp = StateHelper.createSimpleOperation(MODULE, 'readyApp');
 
-export function $ready() {
-  Logger.debug('$ready');
+export function $readyApp() {
+  Logger.debug('$readyApp');
 
   return async (dispatch) => {
-    dispatch(ready.action());
+    dispatch(readyApp.action());
   };
 }
 
 /**
- * Initialize session
+ * Prepare session
  */
 
-const initialize = StateHelper.createSimpleOperation(MODULE, 'initialize');
+const sessionPrepared = StateHelper.createSimpleOperation(MODULE, 'sessionPrepared');
 
-export function $initialize() {
-  Logger.debug('$initialize');
+export function $prepareSession() {
+  Logger.debug('$prepareSession');
 
   return async (dispatch) => {
     await Promise.all([
@@ -53,21 +46,21 @@ export function $initialize() {
       // dispatch($loadSomething()),
     ]);
 
-    return dispatch(initialize.action());
+    return dispatch(sessionPrepared.action());
   };
 }
 
 /**
- * Uninitialize session
+ * Clear session
  */
 
-const uninitialize = StateHelper.createSimpleOperation(MODULE, 'uninitialize');
+const sessionCleared = StateHelper.createSimpleOperation(MODULE, 'sessionCleared');
 
-export function $uninitialize() {
-  Logger.debug('$uninitialize');
+export function $clearSession() {
+  Logger.debug('$clearSession');
 
   return async (dispatch) => {
-    dispatch(uninitialize.action());
+    dispatch(sessionCleared.action());
   };
 }
 
@@ -77,54 +70,22 @@ export function $uninitialize() {
 
 export function reducer(state = INITIAL_STATE, action) {
   switch (action.type) {
-    case ready.TYPE:
+    case readyApp.TYPE:
       return {
         ...state,
-        ready: true,
+        appReady: true,
       };
-    case initialize.TYPE:
+    case sessionPrepared.TYPE:
       return {
         ...state,
-        initialized: true,
+        sessionReady: true,
       };
-    case uninitialize.TYPE:
+    case sessionCleared.TYPE:
       return {
         ...state,
-        initialized: false,
+        sessionReady: false,
       };
     default:
       return state;
   }
-}
-
-/**
- * App initializer
- */
-
-export async function initializer({ dispatch, getState }) {
-  FetchHelper.events.on('failure', (error, response) => {
-    if (AuthService.isAuthenticated() && response.status === 401) {
-      dispatch(Auth.$logout());
-    }
-  });
-
-  await AuthService.initialize();
-
-  if (!AuthService.isAuthenticated() && getState().Auth.authenticated) {
-    dispatch(Auth.$reset());
-  }
-
-  dispatch($ready());
-
-  if (AuthService.isAuthenticated()) {
-    dispatch($initialize()).catch((error) => Activity.toast('failure', error.message));
-  }
-
-  AuthService.events.on('login', () => {
-    dispatch($initialize()).catch((error) => Activity.toast('failure', error.message));
-  });
-
-  AuthService.events.on('logout', () => {
-    dispatch($uninitialize());
-  });
 }

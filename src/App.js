@@ -10,14 +10,14 @@ import Entrance from './Entrance';
 import Session from './Session';
 
 const withStore = connect((state) => ({
-  ready: state.Shared.ready,
-  initialized: state.Shared.initialized,
+  appReady: state.Shared.appReady,
+  sessionReady: state.Shared.sessionReady,
   authenticated: state.Auth.authenticated,
 }));
 
 const propTypes = {
-  ready: PropTypes.bool.isRequired,
-  initialized: PropTypes.bool.isRequired,
+  appReady: PropTypes.bool.isRequired,
+  sessionReady: PropTypes.bool.isRequired,
   authenticated: PropTypes.bool.isRequired,
 };
 
@@ -27,9 +27,9 @@ class App extends Component {
   state = {};
 
   render() {
-    const { ready, initialized, authenticated } = this.props;
+    const { appReady, sessionReady, authenticated } = this.props;
 
-    if (!ready || (authenticated && !initialized)) {
+    if (!appReady || (authenticated && !sessionReady)) {
       return <LandingView />;
     }
 
