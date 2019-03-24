@@ -35,7 +35,7 @@ export function $appReady() {
  * Prepare session
  */
 
-const sessionPrepared = StateHelper.createSimpleOperation(MODULE, 'sessionPrepared');
+const prepareSession = StateHelper.createSimpleOperation(MODULE, 'prepareSession');
 
 export function $prepareSession() {
   Logger.debug('$prepareSession');
@@ -46,7 +46,7 @@ export function $prepareSession() {
       // dispatch($loadSomething()),
     ]);
 
-    return dispatch(sessionPrepared.action());
+    return dispatch(prepareSession.action());
   };
 }
 
@@ -54,13 +54,13 @@ export function $prepareSession() {
  * Clear session
  */
 
-const sessionCleared = StateHelper.createSimpleOperation(MODULE, 'sessionCleared');
+const clearSession = StateHelper.createSimpleOperation(MODULE, 'clearSession');
 
 export function $clearSession() {
   Logger.debug('$clearSession');
 
   return async (dispatch) => {
-    dispatch(sessionCleared.action());
+    dispatch(clearSession.action());
   };
 }
 
@@ -75,12 +75,12 @@ export function reducer(state = INITIAL_STATE, action) {
         ...state,
         appReady: true,
       };
-    case sessionPrepared.TYPE:
+    case prepareSession.TYPE:
       return {
         ...state,
         sessionReady: true,
       };
-    case sessionCleared.TYPE:
+    case clearSession.TYPE:
       return {
         ...state,
         sessionReady: false,
