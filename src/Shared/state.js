@@ -27,7 +27,7 @@ export function $appReady() {
   Logger.debug('$appReady');
 
   return async (dispatch) => {
-    dispatch(appReady.action());
+    return dispatch(appReady.action());
   };
 }
 
@@ -60,7 +60,7 @@ export function $clearSession() {
   Logger.debug('$clearSession');
 
   return async (dispatch) => {
-    dispatch(clearSession.action());
+    return dispatch(clearSession.action());
   };
 }
 
