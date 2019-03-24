@@ -1,9 +1,12 @@
 import React, { Component } from 'react';
-import PropTypes from 'prop-types';
 
 import { withRouter } from 'react-router-dom';
 
 import { connect } from 'react-redux';
+
+import * as Logger from './common/logger';
+
+import * as PropTypes from './common/proptypes';
 
 import LandingView from './Entrance/LandingView';
 import Entrance from './Entrance';
@@ -16,6 +19,7 @@ const withStore = connect((state) => ({
 }));
 
 const propTypes = {
+  dispatch: PropTypes.dispatch.isRequired,
   appReady: PropTypes.bool.isRequired,
   sessionReady: PropTypes.bool.isRequired,
   authenticated: PropTypes.bool.isRequired,
@@ -25,6 +29,10 @@ const Wrapper = (C) => withRouter(withStore(C));
 
 class App extends Component {
   state = {};
+
+  componentDidCatch(error, info) {
+    Logger.error(error, info);
+  }
 
   render() {
     const { appReady, sessionReady, authenticated } = this.props;

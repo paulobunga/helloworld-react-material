@@ -1,10 +1,11 @@
 import React, { Component } from 'react';
-import PropTypes from 'prop-types';
 
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 
 import { Button, TextField } from '@material-ui/core';
+
+import * as PropTypes from '../common/proptypes';
 
 import * as Activity from '../Shared/Activity.service';
 

@@ -18,7 +18,7 @@ export const MODULE = 'Home';
  */
 
 const INITIAL_STATE = {
-  index: null,
+  tasks: null,
 };
 
 /**
@@ -30,16 +30,16 @@ const reset = StateHelper.createSimpleOperation(MODULE, 'reset');
 export const $reset = reset.action;
 
 /**
- * Fetch Index
+ * Fetch Tasks
  */
 
-const fetchIndex = StateHelper.createAsyncOperation(MODULE, 'fetchIndex');
+const fetchTasks = StateHelper.createAsyncOperation(MODULE, 'fetchTasks');
 
 // Promise implementation
 export function $fetchIndexPromise() {
   return (dispatch) => {
-    Activity.processing(MODULE, fetchIndex.name);
-    dispatch(fetchIndex.request());
+    Activity.processing(MODULE, fetchTasks.name);
+    dispatch(fetchTasks.request());
 
     return fetch(`${API_ENDPOINT}/task`, {
       headers: {
@@ -47,17 +47,17 @@ export function $fetchIndexPromise() {
       },
     })
       .then(FetchHelper.ResponseHandler, FetchHelper.ErrorHandler)
-      .then((result) => dispatch(fetchIndex.success(result)))
-      .catch((error) => dispatch(fetchIndex.failure(error)))
-      .finally(() => Activity.done(MODULE, fetchIndex.name));
+      .then((result) => dispatch(fetchTasks.success(result)))
+      .catch((error) => dispatch(fetchTasks.failure(error)))
+      .finally(() => Activity.done(MODULE, fetchTasks.name));
   };
 }
 
 // async/await implementation
-export function $fetchIndex() {
+export function $fetchTasks() {
   return async (dispatch) => {
-    Activity.processing(MODULE, fetchIndex.name);
-    dispatch(fetchIndex.request());
+    Activity.processing(MODULE, fetchTasks.name);
+    dispatch(fetchTasks.request());
 
     try {
       const response = await fetch(`${API_ENDPOINT}/task`, {
@@ -67,12 +67,12 @@ export function $fetchIndex() {
       });
       const result = await FetchHelper.ResponseHandler(response);
 
-      return dispatch(fetchIndex.success(result));
+      return dispatch(fetchTasks.success(result));
     } catch (error) {
       await FetchHelper.ErrorValueHandler(error);
-      dispatch(fetchIndex.failure(error));
+      dispatch(fetchTasks.failure(error));
     } finally {
-      Activity.done(MODULE, fetchIndex.name);
+      Activity.done(MODULE, fetchTasks.name);
     }
   };
 }
@@ -87,7 +87,6 @@ export function $createTask(data) {
   return (dispatch) => {
     Activity.processing(MODULE, createTask.name);
     dispatch(createTask.request());
-    console.log(data, '++');
 
     return fetch(`${API_ENDPOINT}/task/create`, {
       method: 'POST',
@@ -151,7 +150,7 @@ export function $removeTask(taskId) {
       },
     })
       .then(FetchHelper.ResponseHandler, FetchHelper.ErrorHandler)
-      .then(() => dispatch($fetchIndex()))
+      .then(() => dispatch($fetchTasks()))
       .catch((error) => dispatch(removeTask.failure(error)))
       .finally(() => Activity.done(MODULE, removeTask.name));
   };
@@ -165,30 +164,30 @@ export function reducer(state = INITIAL_STATE, action) {
   switch (action.type) {
     case reset.TYPE:
       return INITIAL_STATE;
-    case fetchIndex.REQUEST:
+    case fetchTasks.REQUEST:
       return {
         ...state,
-        index: null,
+        tasks: null,
       };
-    case fetchIndex.SUCCESS:
+    case fetchTasks.SUCCESS:
       return {
         ...state,
-        index: action.data,
+        tasks: action.data,
       };
     case createTask.SUCCESS:
       return {
         ...state,
-        index: [...state.index, action.data],
+        tasks: [...state.tasks, action.data],
       };
     case updateTask.SUCCESS:
       return {
         ...state,
-        index: state.index.map((item) => (action.data.id === item.id ? action.data : item)),
+        tasks: state.tasks.map((item) => (action.data.id === item.id ? action.data : item)),
       };
-    case fetchIndex.FAILURE:
+    case fetchTasks.FAILURE:
       return {
         ...state,
-        index: null,
+        tasks: null,
       };
     default:
       return state;
@@ -199,8 +198,8 @@ export function reducer(state = INITIAL_STATE, action) {
  * Persister
  */
 
-export function persister({ index }) {
+export function persister({ tasks }) {
   return {
-    index,
+    tasks,
   };
 }

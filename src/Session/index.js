@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import PropTypes from 'prop-types';
 
 import {
   Switch, Route, Redirect, Link, withRouter,
@@ -20,6 +19,8 @@ import {
 } from '@material-ui/core';
 
 import { connect } from 'react-redux';
+
+import * as PropTypes from '../common/proptypes';
 
 import ProfileView from './ProfileView';
 import HomeRouter from '../Home';
