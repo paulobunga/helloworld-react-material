@@ -95,7 +95,7 @@ class Session extends Component {
               <Icon>menu</Icon>
             </IconButton>
 
-            <Typography variant="title" color="inherit">
+            <Typography variant="h6" color="inherit">
               Home
             </Typography>
           </Toolbar>

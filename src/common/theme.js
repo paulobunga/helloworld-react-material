@@ -3,6 +3,9 @@ import { createMuiTheme } from '@material-ui/core/styles';
 import { COLOR } from './styles';
 
 export const theme = createMuiTheme({
+  typography: {
+    useNextVariants: true,
+  },
   palette: {
     primary: {
       main: COLOR.primary,

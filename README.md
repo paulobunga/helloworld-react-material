@@ -13,7 +13,7 @@ A boilerplate and reference implementation for web applications built with React
 
 ## References
 
-- [Guidelines](https://github.com/emiketic/emiketic-docs/)
+- [Guidelines](https://github.com/emiketic/emiketic-starter-dev/tree/master/docs/guidelines)
 - [API Specifications/Documentation](https://starterspecapi.docs.apiary.io/)
 - [Documentation](./docs)
 
