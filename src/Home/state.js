@@ -41,7 +41,7 @@ export function $fetchIndexPromise() {
     Activity.processing(MODULE, fetchTasks.name);
     dispatch(fetchTasks.request());
 
-    return fetch(`${API_ENDPOINT}/task`, {
+    return fetch(`${API_ENDPOINT}/client/task`, {
       headers: {
         Authorization: `Bearer ${AuthService.getAccessToken()}`,
       },
@@ -60,7 +60,7 @@ export function $fetchTasks() {
     dispatch(fetchTasks.request());
 
     try {
-      const response = await fetch(`${API_ENDPOINT}/task`, {
+      const response = await fetch(`${API_ENDPOINT}/client/task`, {
         headers: {
           Authorization: `Bearer ${AuthService.getAccessToken()}`,
         },
@@ -88,7 +88,7 @@ export function $createTask(data) {
     Activity.processing(MODULE, createTask.name);
     dispatch(createTask.request());
 
-    return fetch(`${API_ENDPOINT}/task/create`, {
+    return fetch(`${API_ENDPOINT}/client/task/create`, {
       method: 'POST',
       headers: {
         Authorization: `Bearer ${AuthService.getAccessToken()}`,
@@ -116,7 +116,7 @@ export function $updateTask(taskId, data) {
     Activity.processing(MODULE, updateTask.name);
     dispatch(updateTask.request());
 
-    return fetch(`${API_ENDPOINT}/task/${taskId}/edit`, {
+    return fetch(`${API_ENDPOINT}/client/task/${taskId}/edit`, {
       method: 'POST',
       headers: {
         Authorization: `Bearer ${AuthService.getAccessToken()}`,
@@ -143,7 +143,7 @@ export function $removeTask(taskId) {
     Activity.processing(MODULE, removeTask.name);
     dispatch(removeTask.request());
 
-    return fetch(`${API_ENDPOINT}/task/${taskId}/delete`, {
+    return fetch(`${API_ENDPOINT}/client/task/${taskId}/delete`, {
       method: 'POST',
       headers: {
         Authorization: `Bearer ${AuthService.getAccessToken()}`,
