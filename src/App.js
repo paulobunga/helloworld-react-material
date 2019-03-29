@@ -19,7 +19,7 @@ const withStore = connect((state) => ({
 }));
 
 const propTypes = {
-  dispatch: PropTypes.dispatch.isRequired,
+  ...PropTypes.withState,
   appReady: PropTypes.bool.isRequired,
   sessionReady: PropTypes.bool.isRequired,
   authenticated: PropTypes.bool.isRequired,

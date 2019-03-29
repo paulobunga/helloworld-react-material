@@ -13,7 +13,7 @@ const withStore = connect((state) => ({
 }));
 
 const propTypes = {
-  dispatch: PropTypes.dispatch.isRequired,
+  ...PropTypes.withState,
   processing: PropTypes.bool.isRequired,
   user: PropTypes.object.isRequired,
 };
