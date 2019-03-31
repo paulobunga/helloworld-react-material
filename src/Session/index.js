@@ -38,8 +38,8 @@ const withStore = connect(
         .catch((error) => console.log('oops!', error.message));
 
       // dispatch($logout())
-      //   .then(() => (Activity.toast('success', 'Goodbye!')))
-      //   .catch((error) => (Activity.toast('failure', error.message)));
+      //   .then(() => (Dialog.toast(Dialog.SUCCESS, 'Goodbye!')))
+      //   .catch((error) => (Dialog.toast(Dialog.FAILURE, error.message)));
     },
   }),
 );

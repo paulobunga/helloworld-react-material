@@ -6,12 +6,12 @@ import * as Logger from './logger';
 
 import * as CONFIG from './config';
 
-import * as INTL from './intl';
+import $intl from './intl';
 
 if (process.env.NODE_ENV === 'development') {
   global.Logger = Logger;
   global.CONFIG = CONFIG;
-  global.INTL = INTL;
+  global.$intl = $intl;
 }
 
 /**

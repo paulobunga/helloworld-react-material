@@ -7,7 +7,7 @@ import { Button, TextField } from '@material-ui/core';
 
 import * as PropTypes from '../common/proptypes';
 
-import * as Activity from '../Shared/Activity.service';
+import * as Dialog from '../Shared/Dialog';
 
 import { $signup } from '../Auth/state';
 
@@ -32,7 +32,7 @@ class SignupView extends Component {
   signup() {
     const { dispatch } = this.props;
     const { name, email, password } = this.state;
-    dispatch($signup({ name, email, password })).catch((error) => Activity.toast('failure', error.message));
+    dispatch($signup({ name, email, password })).catch((error) => Dialog.toast(Dialog.FAILURE, error.message));
   }
 
   handleInputChange(event) {

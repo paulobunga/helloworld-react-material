@@ -1,6 +1,6 @@
 import * as StateHelper from '../common/state.helper';
 
-import * as Activity from '../Shared/Activity.service';
+import * as Activity from '../Shared/Activity';
 
 import { AuthService } from './Auth.service';
 

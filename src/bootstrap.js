@@ -12,7 +12,7 @@ import * as Auth from './Auth/state';
 
 import * as Shared from './Shared/state';
 
-import * as Activity from './Shared/Activity.service';
+import * as Dialog from './Shared/Dialog';
 
 export default async function bootstrap() {
   const { dispatch, getState } = getStore();
@@ -32,11 +32,11 @@ export default async function bootstrap() {
   dispatch(Shared.$appReady());
 
   if (AuthService.isAuthenticated()) {
-    dispatch(Shared.$prepareSession()).catch((error) => Activity.toast('failure', error.message));
+    dispatch(Shared.$prepareSession()).catch((error) => Dialog.toast(Dialog.FAILURE, error.message));
   }
 
   AuthService.events.on('login', () => {
-    dispatch(Shared.$prepareSession()).catch((error) => Activity.toast('failure', error.message));
+    dispatch(Shared.$prepareSession()).catch((error) => Dialog.toast(Dialog.FAILURE, error.message));
   });
 
   AuthService.events.on('logout', () => {

@@ -34,7 +34,7 @@ A boilerplate and reference implementation for web applications built with React
 npm install
 
 # run app in development on port 3000
-npm start
+npm run dev
 
 # run tests
 npm run test

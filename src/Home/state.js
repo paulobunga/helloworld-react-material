@@ -5,7 +5,7 @@ import * as StateHelper from '../common/state.helper';
 
 import { AuthService } from '../Auth/Auth.service';
 
-import * as Activity from '../Shared/Activity.service';
+import * as Activity from '../Shared/Activity';
 
 /**
  * Module Name
