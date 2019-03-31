@@ -15,6 +15,12 @@ const withStore = connect((state) => ({
   processing: state.Activity.processingByOperation['Auth.login'] || false,
 }));
 
+const propTypes = {
+  ...PropTypes.withRouting,
+  ...PropTypes.withState,
+  processing: PropTypes.bool.isRequired,
+};
+
 const Wrapper = (C) => withStore(C);
 
 class SignupView extends Component {
@@ -97,7 +103,7 @@ class SignupView extends Component {
           <Button component={Link} to="/login" className="text-white">
             Login
           </Button>
-          <Button component={Link} to="/reset" className="text-white">
+          <Button component={Link} to="/password-reset" className="text-white">
             Reset
           </Button>
         </div>
@@ -106,9 +112,6 @@ class SignupView extends Component {
   }
 }
 
-SignupView.propTypes = {
-  dispatch: PropTypes.func.isRequired,
-  processing: PropTypes.bool.isRequired,
-};
+SignupView.propTypes = propTypes;
 
 export default Wrapper(SignupView);

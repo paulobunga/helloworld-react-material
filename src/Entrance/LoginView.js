@@ -9,11 +9,19 @@ import * as PropTypes from '../common/proptypes';
 
 import * as Dialog from '../Shared/Dialog';
 
+import * as $validate from '../common/validate';
+
 import { $login } from '../Auth/state';
 
 const withStore = connect((state) => ({
   processing: state.Activity.processingByOperation['Auth.login'] || false,
 }));
+
+const propTypes = {
+  ...PropTypes.withRouting,
+  ...PropTypes.withState,
+  processing: PropTypes.bool.isRequired,
+};
 
 const Wrapper = (C) => withStore(C);
 
@@ -83,7 +91,7 @@ class LoginView extends Component {
           <Button component={Link} to="/signup" className="text-white">
             Signup
           </Button>
-          <Button component={Link} to="/reset" className="text-white">
+          <Button component={Link} to="/password-reset" className="text-white">
             Reset
           </Button>
         </div>
@@ -92,9 +100,6 @@ class LoginView extends Component {
   }
 }
 
-LoginView.propTypes = {
-  dispatch: PropTypes.func.isRequired,
-  processing: PropTypes.bool.isRequired,
-};
+LoginView.propTypes = propTypes;
 
 export default Wrapper(LoginView);

@@ -3,6 +3,8 @@
  */
 
 export const COLOR = {
+  debug: 'rgba(0,0,0,0.1)',
+
   background: '#F0F1F6',
 
   primary: '#607D8B',
@@ -12,7 +14,6 @@ export const COLOR = {
 
   success: '#2ECC71',
   error: '#E74C3C',
-  // error: '#FF5252',
   info: '#3498DB',
   warning: '#F1C40F',
   off: '#999999',
@@ -25,6 +26,4 @@ export const COLOR = {
 
   white: '#FFFFFF',
   black: '#000000',
-
-  debug: 'rgba(0,0,0,0.1)',
 };

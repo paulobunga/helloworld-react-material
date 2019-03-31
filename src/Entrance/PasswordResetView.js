@@ -5,11 +5,17 @@ import { connect } from 'react-redux';
 
 import { Button } from '@material-ui/core';
 
+import * as PropTypes from '../common/proptypes';
+
 const withStore = connect((state) => ({}));
+const propTypes = {
+  ...PropTypes.withRouting,
+  ...PropTypes.withState,
+};
 
 const Wrapper = (C) => withStore(C);
 
-class SignupView extends Component {
+class PasswordResetView extends Component {
   state = {};
 
   render() {
@@ -28,4 +34,6 @@ class SignupView extends Component {
   }
 }
 
-export default Wrapper(SignupView);
+PasswordResetView.propTypes = propTypes;
+
+export default Wrapper(PasswordResetView);

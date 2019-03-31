@@ -5,6 +5,8 @@ import * as PropTypes from '../common/proptypes';
 
 import { STYLE } from '../common/styles';
 
+import { RELEASE_VERSION } from '../common/config';
+
 const withStore = connect((state) => ({}));
 
 const propTypes = {
@@ -14,14 +16,19 @@ const propTypes = {
 
 const Wrapper = (C) => withStore(C);
 
-class HomeView extends Component {
+class AboutView extends Component {
   state = {};
 
   render() {
-    return <div>HomeView</div>;
+    return (
+      <div>
+        Release:
+        {RELEASE_VERSION}
+      </div>
+    );
   }
 }
 
-HomeView.propTypes = propTypes;
+AboutView.propTypes = propTypes;
 
-export default Wrapper(HomeView);
+export default Wrapper(AboutView);

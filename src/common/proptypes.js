@@ -61,8 +61,17 @@ export const withState = {
  */
 
 export const User = PropTypes.shape({
-  id: PropTypes.string,
-  name: PropTypes.string,
-  picture: PropTypes.string,
-  email: PropTypes.string,
+  email: PropTypes.string.isRequired,
+  id: PropTypes.string.isRequired,
+  name: PropTypes.string.isRequired,
+  picture: PropTypes.string.isRequired,
+});
+
+export const Task = PropTypes.shape({
+  id: PropTypes.string.isRequired,
+  title: PropTypes.string.isRequired,
+  done: PropTypes.bool.isRequired,
+  slug: PropTypes.string.isRequired,
+  created_at: PropTypes.string.isRequired,
+  updated_at: PropTypes.string.isRequired,
 });

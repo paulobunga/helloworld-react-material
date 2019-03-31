@@ -5,7 +5,7 @@ import * as PropTypes from '../common/proptypes';
 
 import * as Dialog from '../Shared/Dialog';
 
-// import { $fetchProfile } from '../Auth/state';
+import { $fetchProfile } from '../Auth/state';
 
 const withStore = connect((state) => ({
   processing: state.Activity.processing,
@@ -13,9 +13,10 @@ const withStore = connect((state) => ({
 }));
 
 const propTypes = {
+  ...PropTypes.withRouting,
   ...PropTypes.withState,
   processing: PropTypes.bool.isRequired,
-  user: PropTypes.object.isRequired,
+  user: PropTypes.User.isRequired,
 };
 
 const Wrapper = (C) => withStore(C);
@@ -24,23 +25,16 @@ class ProfileView extends Component {
   componentDidMount() {
     const { dispatch } = this.props;
 
-    // dispatch($fetchProfile()).catch((error) => Dialog.toast(Dialog.FAILURE, error.message));
+    dispatch($fetchProfile()).catch((error) => Dialog.toast(Dialog.FAILURE, error.message));
   }
 
   render() {
     const { user, processing } = this.props;
 
-    return <div>Profile ... </div>;
+    return <div>ProfileView</div>;
   }
 }
 
-const WrappedProfileView = Wrapper(ProfileView);
+ProfileView.propTypes = propTypes;
 
-WrappedProfileView.propTypes = {};
-
-ProfileView.propTypes = {
-  ...WrappedProfileView.propTypes,
-  ...propTypes,
-};
-
-export default WrappedProfileView;
+export default Wrapper(ProfileView);

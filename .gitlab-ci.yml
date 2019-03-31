@@ -70,4 +70,4 @@ deploy:
   only:
     - master
   script:
-    - ./scripts/upload.sh ./build/
+    - ./scripts/deploy.sh ./build/

@@ -1,3 +1,6 @@
+import { API_ENDPOINT } from '../common/config';
+
+import * as FetchHelper from '../common/fetch.helper';
 import * as StateHelper from '../common/state.helper';
 
 import * as Activity from '../Shared/Activity';
@@ -95,6 +98,29 @@ export function $initiatePasswordReset(email) {
 }
 
 /**
+ * Fetch Profile
+ */
+
+const fetchProfile = StateHelper.createAsyncOperation(MODULE, 'fetchProfile');
+
+export function $fetchProfile() {
+  return (dispatch) => {
+    Activity.processing(MODULE, fetchProfile.name);
+    dispatch(fetchProfile.request());
+
+    return fetch(`${API_ENDPOINT}/user`, {
+      headers: {
+        Authorization: `Bearer ${AuthService.getAccessToken()}`,
+      },
+    })
+      .then(FetchHelper.ResponseHandler, FetchHelper.ErrorHandler)
+      .then((result) => dispatch(fetchProfile.success(result)))
+      .catch((error) => dispatch(fetchProfile.failure(error)))
+      .finally(() => Activity.done(MODULE, fetchProfile.name));
+  };
+}
+
+/**
  * Reducer
  */
 
@@ -107,6 +133,7 @@ export function reducer(state = INITIAL_STATE, action) {
       };
     case login.SUCCESS:
     case signup.SUCCESS:
+    case fetchProfile.SUCCESS:
       const initials = action.user.name
         .split(/\W+/)
         .map((w) => w[0] || '')

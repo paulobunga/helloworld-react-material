@@ -22,38 +22,26 @@ import { connect } from 'react-redux';
 
 import * as PropTypes from '../common/proptypes';
 
+import * as Dialog from '../Shared/Dialog';
+
 import ProfileView from './ProfileView';
 import HomeRouter from '../Home';
 
 import { $logout } from '../Auth/state';
 
-const withStore = connect(
-  (state) => ({
-    user: state.Auth.user,
-  }),
-  (dispatch) => ({
-    logout() {
-      dispatch($logout())
-        .then(() => console.info('Goodbye!'))
-        .catch((error) => console.log('oops!', error.message));
+const withStore = connect((state) => ({
+  user: state.Auth.user,
+}));
 
-      // dispatch($logout())
-      //   .then(() => (Dialog.toast(Dialog.SUCCESS, 'Goodbye!')))
-      //   .catch((error) => (Dialog.toast(Dialog.FAILURE, error.message)));
-    },
-  }),
-);
+const propTypes = {
+  ...PropTypes.withRouting,
+  ...PropTypes.withState,
+  user: PropTypes.User.isRequired,
+};
 
 const Wrapper = (C) => withRouter(withStore(C));
 
-const drawerWidth = 300;
-
-const iOS = process.browser && /iPad|iPhone|iPod/.test(navigator.userAgent);
-
 const styles = {
-  swipeableDrawerPaper: {
-    width: drawerWidth,
-  },
   menuButton: {
     marginLeft: -24,
     marginRight: 16,
@@ -83,6 +71,14 @@ class Session extends Component {
     });
   };
 
+  logout() {
+    const { dispatch } = this.props;
+
+    dispatch($logout())
+      .then(() => Dialog.toast(Dialog.SUCCESS, 'Goodbye!'))
+      .catch((error) => Dialog.toast(Dialog.FAILURE, error.message));
+  }
+
   render() {
     const { swipeableDrawerCallapsed, navigationMenuItems } = this.state;
     const { user, logout } = this.props;
@@ -105,9 +101,6 @@ class Session extends Component {
           open={swipeableDrawerCallapsed}
           onClose={this.toggleDrawer(false)}
           onOpen={this.toggleDrawer(true)}
-          disableBackdropTransition={!iOS}
-          disableDiscovery={iOS}
-          style={styles.swipeableDrawerPaper}
         >
           <div tabIndex={0} role="button" onClick={this.toggleDrawer(false)} onKeyDown={this.toggleDrawer(false)}>
             <ListItem style={styles.listItem}>
@@ -149,9 +142,6 @@ class Session extends Component {
   }
 }
 
-Session.propTypes = {
-  logout: PropTypes.func.isRequired,
-  user: PropTypes.object.isRequired,
-};
+Session.propTypes = propTypes;
 
 export default Wrapper(Session);

@@ -1,12 +1,10 @@
 import React, { Component } from 'react';
 
-import { withRouter } from 'react-router-dom';
-
 import { connect } from 'react-redux';
 
-import * as Logger from './common/logger';
-
 import * as PropTypes from './common/proptypes';
+
+import * as Logger from './common/logger';
 
 import LandingView from './Entrance/LandingView';
 import Entrance from './Entrance';
@@ -25,7 +23,7 @@ const propTypes = {
   authenticated: PropTypes.bool.isRequired,
 };
 
-const Wrapper = (C) => withRouter(withStore(C));
+const Wrapper = (C) => withStore(C);
 
 class App extends Component {
   state = {};
