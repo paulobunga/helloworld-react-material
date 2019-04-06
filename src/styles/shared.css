@@ -1,0 +1,37 @@
+/**
+ * Debug
+ */
+
+.-x-debug {
+  background: rgba(0, 0, 0, 0.1) !important;
+}
+
+.-x-debug-border {
+  border: dashed 1px rgba(0, 0, 0, 0.1) !important;
+}
+
+/**
+ * Layout
+ */
+
+.-x-fit {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+}
+
+.-x-relative {
+  position: relative;
+}
+
+.-x-fixed {
+  position: fixed;
+}
+
+.-x-content-center {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}

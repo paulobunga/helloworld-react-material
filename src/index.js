@@ -3,8 +3,7 @@ import ReactDOM from 'react-dom';
 
 import './common/init';
 
-import './index.css';
-import './App.css';
+import './styles/index.css';
 
 import AppContainer from './AppContainer';
 

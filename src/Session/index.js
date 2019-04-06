@@ -130,7 +130,7 @@ class Session extends Component {
           </div>
         </SwipeableDrawer>
 
-        <main className="-fill-height -x-relative">
+        <main className="-x-relative">
           <Switch>
             <Route path="/home" component={HomeRouter} />
             <Route exact path="/profile" component={ProfileView} />

@@ -1,7 +1,13 @@
 import React from 'react';
 
-// @TODO implement full-screen loader
+import CircularProgress from '@material-ui/core/CircularProgress';
 
-const LandingView = () => <div>Loading...</div>;
+function LandingView() {
+  return (
+    <div className="-x-fit -x-content-center">
+      <CircularProgress />
+    </div>
+  );
+}
 
 export default LandingView;
