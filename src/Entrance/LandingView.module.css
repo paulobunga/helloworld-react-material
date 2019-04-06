@@ -1,0 +1,13 @@
+.container {
+  composes: -x-fit -x-content-center from global;
+  padding: 8px;
+}
+
+.container > * {
+  margin: 8px;
+}
+
+.container img {
+  max-width: 140px;
+  margin-bottom: 32px;
+}

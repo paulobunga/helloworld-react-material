@@ -1,6 +1,6 @@
 {
-  "name": "Hello World",
-  "short_name": "Hello World",
+  "name": "Starter",
+  "short_name": "Starter",
   "description": "...",
   "start_url": "./index.html",
   "display": "standalone",
