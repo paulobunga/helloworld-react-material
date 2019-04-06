@@ -1,13 +1,13 @@
 import React from 'react';
 
 import { BrowserRouter as Router } from 'react-router-dom';
-import { Provider } from 'react-redux';
+import { Provider as StateProvider } from 'react-redux';
 
 import { MuiThemeProvider } from '@material-ui/core/styles';
 
-import App from './App';
-
 import { theme } from './common/theme';
+
+import App from './App';
 
 import { setupStore } from './store';
 
@@ -19,11 +19,11 @@ bootstrap();
 
 const AppContainer = () => (
   <MuiThemeProvider theme={theme}>
-    <Provider store={store}>
+    <StateProvider store={store}>
       <Router>
         <App />
       </Router>
-    </Provider>
+    </StateProvider>
   </MuiThemeProvider>
 );
 

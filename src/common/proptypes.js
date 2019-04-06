@@ -21,31 +21,29 @@ const location = PropTypes.shape({
 });
 
 export const withRouting = {
-  router: PropTypes.shape({
-    match: PropTypes.shape({
-      isExact: PropTypes.bool,
-      params: PropTypes.object.isRequired,
-      path: PropTypes.string.isRequired,
-      url: PropTypes.string.isRequired,
-    }).isRequired,
+  match: PropTypes.shape({
+    isExact: PropTypes.bool,
+    params: PropTypes.object.isRequired,
+    path: PropTypes.string.isRequired,
+    url: PropTypes.string.isRequired,
+  }).isRequired,
+  location: location.isRequired,
+  history: PropTypes.shape({
+    action: PropTypes.oneOf(['PUSH', 'REPLACE', 'POP']).isRequired,
+    block: PropTypes.func.isRequired,
+    canGo: PropTypes.func, // only in createMemoryHistory
+    createHref: PropTypes.func.isRequired,
+    entries: PropTypes.arrayOf(location), // only in createMemoryHistory
+    go: PropTypes.func.isRequired,
+    goBack: PropTypes.func.isRequired,
+    goForward: PropTypes.func.isRequired,
+    index: PropTypes.number, // only in createMemoryHistory
+    length: PropTypes.number,
+    listen: PropTypes.func.isRequired,
     location: location.isRequired,
-    history: PropTypes.shape({
-      action: PropTypes.oneOf(['PUSH', 'REPLACE', 'POP']).isRequired,
-      block: PropTypes.func.isRequired,
-      canGo: PropTypes.func, // only in createMemoryHistory
-      createHref: PropTypes.func.isRequired,
-      entries: PropTypes.arrayOf(location), // only in createMemoryHistory
-      go: PropTypes.func.isRequired,
-      goBack: PropTypes.func.isRequired,
-      goForward: PropTypes.func.isRequired,
-      index: PropTypes.number, // only in createMemoryHistory
-      length: PropTypes.number,
-      listen: PropTypes.func.isRequired,
-      location: location.isRequired,
-      push: PropTypes.func.isRequired,
-      replace: PropTypes.func.isRequired,
-    }).isRequired,
-  }),
+    push: PropTypes.func.isRequired,
+    replace: PropTypes.func.isRequired,
+  }).isRequired,
 };
 
 /**
@@ -61,10 +59,10 @@ export const withState = {
  */
 
 export const User = PropTypes.shape({
-  email: PropTypes.string.isRequired,
   id: PropTypes.string.isRequired,
+  email: PropTypes.string.isRequired,
   name: PropTypes.string.isRequired,
-  picture: PropTypes.string.isRequired,
+  picture_uri: PropTypes.string.isRequired,
 });
 
 export const Task = PropTypes.shape({
