@@ -25,21 +25,17 @@ const INITIAL_STATE = {
  * Reset
  */
 
-const reset = StateHelper.createSimpleOperation(MODULE, 'reset');
-
-export const $reset = reset.action;
+export const $reset = StateHelper.createSimpleOperation(MODULE, 'reset', () => $reset.action());
 
 /**
  * Fetch Tasks
  */
 
-const fetchTasks = StateHelper.createAsyncOperation(MODULE, 'fetchTasks');
-
 // Promise implementation
-export function $fetchIndexPromise() {
+const $fetchTasksPromise = StateHelper.createAsyncOperation(MODULE, 'fetchTasks', () => {
   return (dispatch) => {
-    Activity.processing(MODULE, fetchTasks.name);
-    dispatch(fetchTasks.request());
+    Activity.processing(MODULE, $fetchTasksPromise.NAME);
+    dispatch($fetchTasksPromise.request());
 
     return fetch(`${API_ENDPOINT}/client/task`, {
       headers: {
@@ -47,17 +43,17 @@ export function $fetchIndexPromise() {
       },
     })
       .then(FetchHelper.ResponseHandler, FetchHelper.ErrorHandler)
-      .then((result) => dispatch(fetchTasks.success(result)))
-      .catch((error) => dispatch(fetchTasks.failure(error)))
-      .finally(() => Activity.done(MODULE, fetchTasks.name));
+      .then((result) => dispatch($fetchTasksPromise.success(result)))
+      .catch((error) => dispatch($fetchTasksPromise.failure(error)))
+      .finally(() => Activity.done(MODULE, $fetchTasksPromise.NAME));
   };
-}
+});
 
 // async/await implementation
-export function $fetchTasks() {
+export const $fetchTasks = StateHelper.createAsyncOperation(MODULE, 'fetchTasks', () => {
   return async (dispatch) => {
-    Activity.processing(MODULE, fetchTasks.name);
-    dispatch(fetchTasks.request());
+    Activity.processing(MODULE, $fetchTasks.NAME);
+    dispatch($fetchTasks.request());
 
     try {
       const response = await fetch(`${API_ENDPOINT}/client/task`, {
@@ -67,26 +63,24 @@ export function $fetchTasks() {
       });
       const result = await FetchHelper.ResponseHandler(response);
 
-      return dispatch(fetchTasks.success(result));
+      return dispatch($fetchTasks.success(result));
     } catch (error) {
       await FetchHelper.ErrorValueHandler(error);
-      dispatch(fetchTasks.failure(error));
+      dispatch($fetchTasks.failure(error));
     } finally {
-      Activity.done(MODULE, fetchTasks.name);
+      Activity.done(MODULE, $fetchTasks.NAME);
     }
   };
-}
+});
 
 /**
  * Create Task
  */
 
-const createTask = StateHelper.createAsyncOperation(MODULE, 'createTask');
-
-export function $createTask(data) {
+export const $createTask = StateHelper.createAsyncOperation(MODULE, 'createTask', (data) => {
   return (dispatch) => {
-    Activity.processing(MODULE, createTask.name);
-    dispatch(createTask.request());
+    Activity.processing(MODULE, $createTask.NAME);
+    dispatch($createTask.request());
 
     return fetch(`${API_ENDPOINT}/client/task/create`, {
       method: 'POST',
@@ -99,22 +93,20 @@ export function $createTask(data) {
       }),
     })
       .then(FetchHelper.ResponseHandler, FetchHelper.ErrorHandler)
-      .then((result) => dispatch(createTask.success(result)))
-      .catch((error) => dispatch(createTask.failure(error)))
-      .finally(() => Activity.done(MODULE, createTask.name));
+      .then((result) => dispatch($createTask.success(result)))
+      .catch((error) => dispatch($createTask.failure(error)))
+      .finally(() => Activity.done(MODULE, $createTask.NAME));
   };
-}
+});
 
 /**
  * Update Task
  */
 
-const updateTask = StateHelper.createAsyncOperation(MODULE, 'updateTask');
-
-export function $updateTask(taskId, data) {
+export const $updateTask = StateHelper.createAsyncOperation(MODULE, 'updateTask', (taskId, data) => {
   return (dispatch) => {
-    Activity.processing(MODULE, updateTask.name);
-    dispatch(updateTask.request());
+    Activity.processing(MODULE, $updateTask.NAME);
+    dispatch($updateTask.request());
 
     return fetch(`${API_ENDPOINT}/client/task/${taskId}/edit`, {
       method: 'POST',
@@ -127,21 +119,20 @@ export function $updateTask(taskId, data) {
       }),
     })
       .then(FetchHelper.ResponseHandler, FetchHelper.ErrorHandler)
-      .then((result) => dispatch(updateTask.success(result)))
-      .catch((error) => dispatch(updateTask.failure(error)))
-      .finally(() => Activity.done(MODULE, updateTask.name));
+      .then((result) => dispatch($updateTask.success(result)))
+      .catch((error) => dispatch($updateTask.failure(error)))
+      .finally(() => Activity.done(MODULE, $updateTask.NAME));
   };
-}
+});
 
 /**
  * Remove Task
  */
-const removeTask = StateHelper.createAsyncOperation(MODULE, 'removeTask');
 
-export function $removeTask(taskId) {
+export const $removeTask = StateHelper.createAsyncOperation(MODULE, 'removeTask', (taskId) => {
   return (dispatch) => {
-    Activity.processing(MODULE, removeTask.name);
-    dispatch(removeTask.request());
+    Activity.processing(MODULE, $removeTask.NAME);
+    dispatch($removeTask.request());
 
     return fetch(`${API_ENDPOINT}/client/task/${taskId}/delete`, {
       method: 'POST',
@@ -151,10 +142,10 @@ export function $removeTask(taskId) {
     })
       .then(FetchHelper.ResponseHandler, FetchHelper.ErrorHandler)
       .then(() => dispatch($fetchTasks()))
-      .catch((error) => dispatch(removeTask.failure(error)))
-      .finally(() => Activity.done(MODULE, removeTask.name));
+      .catch((error) => dispatch($removeTask.failure(error)))
+      .finally(() => Activity.done(MODULE, $removeTask.NAME));
   };
-}
+});
 
 /**
  * Reducer
@@ -162,29 +153,29 @@ export function $removeTask(taskId) {
 
 export function reducer(state = INITIAL_STATE, action) {
   switch (action.type) {
-    case reset.TYPE:
+    case $reset.ACTION:
       return INITIAL_STATE;
-    case fetchTasks.REQUEST:
+    case $fetchTasks.REQUEST:
       return {
         ...state,
         tasks: null,
       };
-    case fetchTasks.SUCCESS:
+    case $fetchTasks.SUCCESS:
       return {
         ...state,
         tasks: action.data,
       };
-    case createTask.SUCCESS:
+    case $createTask.SUCCESS:
       return {
         ...state,
         tasks: [...state.tasks, action.data],
       };
-    case updateTask.SUCCESS:
+    case $updateTask.SUCCESS:
       return {
         ...state,
         tasks: state.tasks.map((item) => (action.data.id === item.id ? action.data : item)),
       };
-    case fetchTasks.FAILURE:
+    case $fetchTasks.FAILURE:
       return {
         ...state,
         tasks: null,

@@ -21,48 +21,41 @@ const INITIAL_STATE = {
  * Ready app
  */
 
-const appReady = StateHelper.createSimpleOperation(MODULE, 'appReady');
-
-export function $appReady() {
-  Logger.debug('$appReady');
-
+export const $appReady = StateHelper.createSimpleOperation(MODULE, 'appReady', () => {
   return async (dispatch) => {
-    return dispatch(appReady.action());
+    await Promise.all([
+      new Promise((resolve) => setTimeout(resolve, 1000)),
+      // dispatch($loadSomething()),
+    ]);
+
+    return dispatch($appReady.action());
   };
-}
+});
 
 /**
  * Prepare session
  */
 
-const prepareSession = StateHelper.createSimpleOperation(MODULE, 'prepareSession');
-
-export function $prepareSession() {
-  Logger.debug('$prepareSession');
-
+export const $prepareSession = StateHelper.createSimpleOperation(MODULE, 'prepareSession', () => {
   return async (dispatch) => {
     await Promise.all([
       new Promise((resolve) => setTimeout(resolve, 2000)),
       // dispatch($loadSomething()),
     ]);
 
-    return dispatch(prepareSession.action());
+    return dispatch($prepareSession.action());
   };
-}
+});
 
 /**
  * Clear session
  */
 
-const clearSession = StateHelper.createSimpleOperation(MODULE, 'clearSession');
-
-export function $clearSession() {
-  Logger.debug('$clearSession');
-
+export const $clearSession = StateHelper.createSimpleOperation(MODULE, 'clearSession', () => {
   return async (dispatch) => {
-    return dispatch(clearSession.action());
+    return dispatch($clearSession.action());
   };
-}
+});
 
 /**
  * Reducer
@@ -70,17 +63,17 @@ export function $clearSession() {
 
 export function reducer(state = INITIAL_STATE, action) {
   switch (action.type) {
-    case appReady.TYPE:
+    case $appReady.ACTION:
       return {
         ...state,
         appReady: true,
       };
-    case prepareSession.TYPE:
+    case $prepareSession.ACTION:
       return {
         ...state,
         sessionReady: true,
       };
-    case clearSession.TYPE:
+    case $clearSession.ACTION:
       return {
         ...state,
         sessionReady: false,

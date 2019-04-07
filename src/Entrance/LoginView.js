@@ -14,7 +14,7 @@ import * as $validate from '../common/validate';
 import { $login } from '../Auth/state';
 
 const withStore = connect((state) => ({
-  processing: state.Activity.processingByOperation['Auth.login'] || false,
+  processing: state.Activity.processingByOperation[$login.OPERATION] || false,
 }));
 
 const propTypes = {
@@ -78,20 +78,15 @@ class LoginView extends Component {
           />
         </form>
 
-        <Button
-          className="btn-accent -fill-width"
-          style={{ marginTop: 8 }}
-          disabled={processing}
-          onClick={() => this.login()}
-        >
+        <Button style={{ marginTop: 8 }} disabled={processing} onClick={() => this.login()}>
           Login
         </Button>
 
         <div style={{ marginTop: 16 }}>
-          <Button component={Link} to="/signup" className="text-white">
+          <Button component={Link} to="/signup">
             Signup
           </Button>
-          <Button component={Link} to="/password-reset" className="text-white">
+          <Button component={Link} to="/password-reset">
             Reset
           </Button>
         </div>

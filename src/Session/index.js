@@ -121,7 +121,7 @@ class Session extends Component {
               </Link>
             ))}
 
-            <ListItem dense button onClick={() => logout()}>
+            <ListItem dense button onClick={() => this.logout()}>
               <ListItemIcon>
                 <Icon>exit_to_app</Icon>
               </ListItemIcon>

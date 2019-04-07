@@ -12,7 +12,7 @@ import * as Dialog from '../Shared/Dialog';
 import { $signup } from '../Auth/state';
 
 const withStore = connect((state) => ({
-  processing: state.Activity.processingByOperation['Auth.login'] || false,
+  processing: state.Activity.processingByOperation[$signup.OPERATION] || false,
 }));
 
 const propTypes = {
@@ -90,20 +90,15 @@ class SignupView extends Component {
           />
         </form>
 
-        <Button
-          className="btn-accent -fill-width"
-          style={{ marginTop: 8 }}
-          disabled={processing}
-          onClick={() => this.signup()}
-        >
+        <Button style={{ marginTop: 8 }} disabled={processing} onClick={() => this.signup()}>
           Signup
         </Button>
 
         <div style={{ marginTop: 16 }}>
-          <Button component={Link} to="/login" className="text-white">
+          <Button component={Link} to="/login">
             Login
           </Button>
-          <Button component={Link} to="/password-reset" className="text-white">
+          <Button component={Link} to="/password-reset">
             Reset
           </Button>
         </div>

@@ -15,7 +15,7 @@ class Entrance extends Component {
 
   render() {
     return (
-      <div style={{ backgroundColor: `${COLOR.primary}` }} className="-x-fit">
+      <div className="-x-fit">
         <div
           style={{
             alignItems: 'center',

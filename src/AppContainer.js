@@ -3,7 +3,7 @@ import React from 'react';
 import { BrowserRouter as Router } from 'react-router-dom';
 import { Provider as StateProvider } from 'react-redux';
 
-import { MuiThemeProvider } from '@material-ui/core/styles';
+import { MuiThemeProvider as ThemeProvider } from '@material-ui/core/styles';
 
 import { theme } from './common/theme';
 
@@ -13,11 +13,11 @@ import { getStore } from './store';
 
 const AppContainer = () => (
   <StateProvider store={getStore()}>
-    <MuiThemeProvider theme={theme}>
+    <ThemeProvider theme={theme}>
       <Router>
         <App />
       </Router>
-    </MuiThemeProvider>
+    </ThemeProvider>
   </StateProvider>
 );
 

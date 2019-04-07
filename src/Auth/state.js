@@ -26,87 +26,75 @@ const INITIAL_STATE = {
  * Reset
  */
 
-const reset = StateHelper.createSimpleOperation(MODULE, 'reset');
-
-export const $reset = reset.action;
+export const $reset = StateHelper.createSimpleOperation(MODULE, 'reset', () => $reset.action());
 
 /**
  * Login
  */
 
-const login = StateHelper.createAsyncOperation(MODULE, 'login');
-
-export function $login(username, password) {
+export const $login = StateHelper.createAsyncOperation(MODULE, 'login', (username, password) => {
   return (dispatch) => {
-    Activity.processing(MODULE, login.name);
-    dispatch(login.request());
+    Activity.processing(MODULE, $login.NAME);
+    dispatch($login.request());
 
     return AuthService.login(username, password)
-      .then((result) => dispatch(login.success(result)))
-      .catch((error) => dispatch(login.failure(error)))
-      .finally(() => Activity.done(MODULE, login.name));
+      .then((result) => dispatch($login.success(result)))
+      .catch((error) => dispatch($login.failure(error)))
+      .finally(() => Activity.done(MODULE, $login.NAME));
   };
-}
+});
 
 /**
  * Logout
  */
 
-const logout = StateHelper.createSimpleOperation(MODULE, 'logout');
-
-export function $logout() {
+export const $logout = StateHelper.createSimpleOperation(MODULE, 'logout', () => {
   return (dispatch) => {
-    dispatch(logout.action());
+    dispatch($logout.action());
     return AuthService.logout();
   };
-}
+});
 
 /**
  * Signup
  */
 
-const signup = StateHelper.createAsyncOperation(MODULE, 'signup');
-
-export function $signup(payload) {
+export const $signup = StateHelper.createAsyncOperation(MODULE, 'signup', (payload) => {
   return async (dispatch) => {
-    Activity.processing(MODULE, signup.name);
-    dispatch(signup.request());
+    Activity.processing(MODULE, $signup.NAME);
+    dispatch($signup.request());
 
     return AuthService.signup(payload)
-      .then((result) => dispatch(signup.success(result)))
-      .catch((error) => dispatch(signup.failure(error)))
-      .finally(() => Activity.done(MODULE, signup.name));
+      .then((result) => dispatch($signup.success(result)))
+      .catch((error) => dispatch($signup.failure(error)))
+      .finally(() => Activity.done(MODULE, $signup.NAME));
   };
-}
+});
 
 /**
  * Password Reset
  */
 
-const initiatePasswordReset = StateHelper.createAsyncOperation(MODULE, 'initiatePasswordReset');
-
-export function $initiatePasswordReset(email) {
+export const $initiatePasswordReset = StateHelper.createAsyncOperation(MODULE, 'initiatePasswordReset', (email) => {
   return (dispatch) => {
-    Activity.processing(MODULE, initiatePasswordReset.name);
-    dispatch(initiatePasswordReset.request());
+    Activity.processing(MODULE, $initiatePasswordReset.NAME);
+    dispatch($initiatePasswordReset.request());
 
     return AuthService.initiatePasswordReset(email)
-      .then((result) => dispatch(initiatePasswordReset.success(result)))
-      .catch((error) => dispatch(initiatePasswordReset.failure(error)))
-      .finally(() => Activity.done(MODULE, initiatePasswordReset.name));
+      .then((result) => dispatch($initiatePasswordReset.success(result)))
+      .catch((error) => dispatch($initiatePasswordReset.failure(error)))
+      .finally(() => Activity.done(MODULE, $initiatePasswordReset.NAME));
   };
-}
+});
 
 /**
  * Fetch Profile
  */
 
-const fetchProfile = StateHelper.createAsyncOperation(MODULE, 'fetchProfile');
-
-export function $fetchProfile() {
+export const $fetchProfile = StateHelper.createAsyncOperation(MODULE, 'fetchProfile', () => {
   return (dispatch) => {
-    Activity.processing(MODULE, fetchProfile.name);
-    dispatch(fetchProfile.request());
+    Activity.processing(MODULE, $fetchProfile.NAME);
+    dispatch($fetchProfile.request());
 
     return fetch(`${API_ENDPOINT}/user`, {
       headers: {
@@ -114,11 +102,11 @@ export function $fetchProfile() {
       },
     })
       .then(FetchHelper.ResponseHandler, FetchHelper.ErrorHandler)
-      .then((result) => dispatch(fetchProfile.success(result)))
-      .catch((error) => dispatch(fetchProfile.failure(error)))
-      .finally(() => Activity.done(MODULE, fetchProfile.name));
+      .then((result) => dispatch($fetchProfile.success(result)))
+      .catch((error) => dispatch($fetchProfile.failure(error)))
+      .finally(() => Activity.done(MODULE, $fetchProfile.NAME));
   };
-}
+});
 
 /**
  * Reducer
@@ -126,14 +114,14 @@ export function $fetchProfile() {
 
 export function reducer(state = INITIAL_STATE, action) {
   switch (action.type) {
-    case login.REQUEST:
+    case $login.REQUEST:
       return {
         ...state,
         user: null,
       };
-    case login.SUCCESS:
-    case signup.SUCCESS:
-    case fetchProfile.SUCCESS:
+    case $login.SUCCESS:
+    case $signup.SUCCESS:
+    case $fetchProfile.SUCCESS:
       const initials = action.user.name
         .split(/\W+/)
         .map((w) => w[0] || '')
@@ -148,7 +136,7 @@ export function reducer(state = INITIAL_STATE, action) {
           initials,
         },
       };
-    case logout.TYPE:
+    case $logout.ACTION:
       return {
         ...state,
         authenticated: false,
