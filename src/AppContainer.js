@@ -9,22 +9,16 @@ import { theme } from './common/theme';
 
 import App from './App';
 
-import { setupStore } from './store';
-
-import bootstrap from './bootstrap';
-
-const store = setupStore();
-
-bootstrap();
+import { getStore } from './store';
 
 const AppContainer = () => (
-  <MuiThemeProvider theme={theme}>
-    <StateProvider store={store}>
+  <StateProvider store={getStore()}>
+    <MuiThemeProvider theme={theme}>
       <Router>
         <App />
       </Router>
-    </StateProvider>
-  </MuiThemeProvider>
+    </MuiThemeProvider>
+  </StateProvider>
 );
 
 export default AppContainer;

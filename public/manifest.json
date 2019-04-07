@@ -2,6 +2,7 @@
   "name": "Starter",
   "short_name": "Starter",
   "description": "Starter!",
+  "lang": "en",
   "start_url": "./index.html",
   "display": "standalone",
   "background_color": "#FFFFFF",
