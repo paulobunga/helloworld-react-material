@@ -1,11 +1,11 @@
 /**
- * Module Name
+ * Module name
  */
 
 export const MODULE = 'Session';
 
 /**
- * Initial State
+ * Initial state
  */
 
 const INITIAL_STATE = {};

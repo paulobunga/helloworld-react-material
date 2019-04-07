@@ -8,13 +8,13 @@ import { AuthService } from '../Auth/Auth.service';
 import * as Activity from '../Shared/Activity';
 
 /**
- * Module Name
+ * Module name
  */
 
 export const MODULE = 'Home';
 
 /**
- * Initial State
+ * Initial state
  */
 
 const INITIAL_STATE = {
@@ -28,7 +28,7 @@ const INITIAL_STATE = {
 export const $reset = StateHelper.createSimpleOperation(MODULE, 'reset', () => $reset.action());
 
 /**
- * Fetch Tasks
+ * Fetch tasks
  */
 
 // Promise implementation
@@ -74,7 +74,7 @@ export const $fetchTasks = StateHelper.createAsyncOperation(MODULE, 'fetchTasks'
 });
 
 /**
- * Create Task
+ * Create task
  */
 
 export const $createTask = StateHelper.createAsyncOperation(MODULE, 'createTask', (data) => {
@@ -100,7 +100,7 @@ export const $createTask = StateHelper.createAsyncOperation(MODULE, 'createTask'
 });
 
 /**
- * Update Task
+ * Update task
  */
 
 export const $updateTask = StateHelper.createAsyncOperation(MODULE, 'updateTask', (taskId, data) => {
@@ -126,7 +126,7 @@ export const $updateTask = StateHelper.createAsyncOperation(MODULE, 'updateTask'
 });
 
 /**
- * Remove Task
+ * Remove task
  */
 
 export const $removeTask = StateHelper.createAsyncOperation(MODULE, 'removeTask', (taskId) => {

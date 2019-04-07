@@ -3,13 +3,13 @@ import * as StateHelper from '../common/state.helper';
 import * as Logger from '../common/logger';
 
 /**
- * Module Name
+ * Module name
  */
 
 export const MODULE = 'Activity';
 
 /**
- * Initial State
+ * Initial state
  */
 
 const INITIAL_STATE = () => ({

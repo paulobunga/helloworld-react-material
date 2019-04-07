@@ -3,13 +3,13 @@ import * as Logger from '../common/logger';
 import * as StateHelper from '../common/state.helper';
 
 /**
- * Module Name
+ * Module name
  */
 
 export const MODULE = 'Shared';
 
 /**
- * Initial State
+ * Initial state
  */
 
 const INITIAL_STATE = {

@@ -8,13 +8,13 @@ import * as Activity from '../Shared/Activity';
 import { AuthService } from './Auth.service';
 
 /**
- * Module Name
+ * Module name
  */
 
 export const MODULE = 'Auth';
 
 /**
- * Initial State
+ * Initial state
  */
 
 const INITIAL_STATE = {
@@ -72,7 +72,7 @@ export const $signup = StateHelper.createAsyncOperation(MODULE, 'signup', (paylo
 });
 
 /**
- * Password Reset
+ * Initiate password reset
  */
 
 export const $initiatePasswordReset = StateHelper.createAsyncOperation(MODULE, 'initiatePasswordReset', (email) => {
@@ -88,7 +88,7 @@ export const $initiatePasswordReset = StateHelper.createAsyncOperation(MODULE, '
 });
 
 /**
- * Fetch Profile
+ * Fetch profile
  */
 
 export const $fetchProfile = StateHelper.createAsyncOperation(MODULE, 'fetchProfile', () => {
