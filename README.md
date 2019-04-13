@@ -1,4 +1,4 @@
-# Hello WorldWebapp (React/Redux with Material Design)
+# Hello World Webapp (React/Redux with Material Design)
 
 ![](https://img.shields.io/david/emiketic/helloworld-react-material.svg?style=for-the-badge)
 
