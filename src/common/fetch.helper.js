@@ -1,1 +1,1 @@
-export * from 'starter-lib/src/common/fetch.helper';
+export * from 'helloworld-lib/src/common/fetch.helper';

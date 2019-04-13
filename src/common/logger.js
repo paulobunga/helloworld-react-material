@@ -1,1 +1,1 @@
-export * from 'starter-lib/src/common/logger';
+export * from 'helloworld-lib/src/common/logger';

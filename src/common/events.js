@@ -1,1 +1,1 @@
-export * from 'starter-lib/src/common/events';
+export * from 'helloworld-lib/src/common/events';

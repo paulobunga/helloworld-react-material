@@ -1,19 +1,19 @@
-# Starter Webapp (React/Redux with Material Design)
+# Hello WorldWebapp (React/Redux with Material Design)
 
-![](https://img.shields.io/david/emiketic/emiketic-starter-react.svg?style=for-the-badge)
+![](https://img.shields.io/david/emiketic/helloworld-react-material.svg?style=for-the-badge)
 
 A boilerplate and reference implementation for web applications built with React, Redux, and React Material.
 
 ## Preview
 
-- http://react.starter.emiketic.com
+- http://react-material.helloworld.emiketic.com
 - Access credentials:
-  - email: `client@starter.emiketic.com`
+  - email: `client@helloworld.emiketic.com`
   - password: `password`
 
 ## References
 
-- [Guidelines](https://github.com/emiketic/emiketic-starter-dev/tree/master/docs/guidelines)
+- [Guidelines](https://github.com/emiketic/helloworld-dev/tree/master/docs/guidelines)
 - [API Specifications/Documentation](https://starterspecapi.docs.apiary.io/)
 - [Documentation](./docs)
 

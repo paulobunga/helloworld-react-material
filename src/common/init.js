@@ -18,7 +18,7 @@ if (process.env.NODE_ENV === 'development') {
  * Setup Logger
  */
 
-const PREFIX = 'Starter';
+const PREFIX = 'HelloWorld';
 
 Logger.setup(PREFIX);
 

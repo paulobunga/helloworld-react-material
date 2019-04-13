@@ -1,4 +1,4 @@
-export * from 'starter-lib/src/common/validate';
+export * from 'helloworld-lib/src/common/validate';
 
 export function exec(value, rules) {
   let _error = [];

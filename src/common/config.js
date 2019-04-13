@@ -15,4 +15,4 @@ if (localStorage && localStorage.CONFIG_OVERRIDE) {
 debug('CONFIG_OVERRIDE', CONFIG_OVERRIDE);
 
 export const API_ENDPOINT = CONFIG_OVERRIDE.API_ENDPOINT
-  || (process.env.NODE_ENV === 'production' ? 'http://backend.starter.emiketic.com' : 'http://localhost:5000');
+  || (process.env.NODE_ENV === 'production' ? 'http://backend.helloworld.emiketic.com' : 'http://localhost:5000');

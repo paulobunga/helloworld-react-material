@@ -1,7 +1,7 @@
 {
-  "name": "Starter",
-  "short_name": "Starter",
-  "description": "Starter!",
+  "name": "Hello World",
+  "short_name": "Hello World",
+  "description": "Hello World!",
   "lang": "en",
   "start_url": "./index.html",
   "display": "standalone",

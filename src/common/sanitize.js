@@ -1,1 +1,1 @@
-export * from 'starter-lib/src/common/sanitize';
+export * from 'helloworld-lib/src/common/sanitize';

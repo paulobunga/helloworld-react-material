@@ -1,1 +1,1 @@
-export * from 'starter-lib/src/common/const';
+export * from 'helloworld-lib/src/common/const';

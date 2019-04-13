@@ -1,1 +1,1 @@
-export * from 'starter-lib/src/common/error';
+export * from 'helloworld-lib/src/common/error';

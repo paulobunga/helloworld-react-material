@@ -1,1 +1,1 @@
-export * from 'starter-lib/src/common/transform';
+export * from 'helloworld-lib/src/common/transform';

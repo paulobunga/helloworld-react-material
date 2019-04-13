@@ -1,1 +1,1 @@
-export * from 'starter-lib/src/browser/polyfill';
+export * from 'helloworld-lib/src/browser/polyfill';
