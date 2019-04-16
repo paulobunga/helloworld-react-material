@@ -1,6 +1,7 @@
 
 stages:
   - prepare
+  - lint
   - test
   - build
   - deploy
@@ -19,8 +20,17 @@ install:
   script:
     - npm install
 
+lint-critical:
+  stage: lint
+  tags:
+    - docker
+  before_script:
+    - npm install
+  script:
+    - npm run lint:critical
+
 lint:
-  stage: test
+  stage: lint
   tags:
     - docker
   before_script:
@@ -28,16 +38,6 @@ lint:
   script:
     - npm run lint
   allow_failure: true
-
-lint-critical:
-  stage: test
-  tags:
-    - docker
-  before_script:
-    - npm install
-  script:
-    - npm run lint:critical
-  # allow_failure: true
 
 test:
   stage: test
@@ -59,6 +59,17 @@ build:
   artifacts:
     paths:
       - ./build/
+
+# deploy:
+#   stage: deploy
+#   dependencies:
+#     - build
+#   tags:
+#     - deploy:helloworld
+#   only:
+#     - master
+#   script:
+#     - ./scripts/deploy.sh ./build/ /app/helloworld-react-material/www/
 
 deploy:
   stage: deploy
