@@ -69,7 +69,7 @@ build:
 #   only:
 #     - master
 #   script:
-#     - ./scripts/deploy.sh ./build/ /app/helloworld-react-material/www/
+#     - ./scripts/deploy.sh ./build/
 
 deploy:
   stage: deploy
