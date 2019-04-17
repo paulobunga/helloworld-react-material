@@ -3,9 +3,16 @@ input=$PWD/$1
 
 size=$2
 
-output=${3:-$1}
-output=$(basename $output .png)
-output=$(basename $output .svg)
+output=$3
+
+if [ -z "$output" ] ; then
+  output=$(basename $input)
+fi
+
+output=${output/%.png/}
+output=${output/%.jpg/}
+output=${output/%.jpeg/}
+output=${output/%.svg/}
 
 FORMAT=$(identify -format '%m' "$input")
 
