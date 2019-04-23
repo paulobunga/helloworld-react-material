@@ -96,7 +96,7 @@ export const $fetchProfile = StateHelper.createAsyncOperation(MODULE, 'fetchProf
     Activity.processing(MODULE, $fetchProfile.NAME);
     dispatch($fetchProfile.request());
 
-    return fetch(`${API_ENDPOINT}/user`, {
+    return fetch(`${API_ENDPOINT}/self/profile`, {
       headers: {
         Authorization: `Bearer ${AuthService.getAccessToken()}`,
       },
