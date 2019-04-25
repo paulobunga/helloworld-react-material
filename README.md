@@ -25,7 +25,7 @@ A boilerplate and reference implementation for web applications built with React
 
 ## Requirements
 
-- [Node.js v8+](https://nodejs.org/)
+- [Node.js v10+](https://nodejs.org/)
 
 ## Usage
 

@@ -10,7 +10,7 @@ import bootstrap from './bootstrap';
 
 import AppContainer from './AppContainer';
 
-// import registerServiceWorker from './registerServiceWorker';
+import * as serviceWorker from './serviceWorker';
 
 setupStore();
 
@@ -18,6 +18,7 @@ ReactDOM.render(<AppContainer />, document.getElementById('app'));
 
 bootstrap();
 
-// registerServiceWorker();
+serviceWorker.unregister();
+// serviceWorker.register();
 
 import('pwacompat');
