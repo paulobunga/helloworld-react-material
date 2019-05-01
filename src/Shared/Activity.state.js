@@ -12,7 +12,7 @@ export const MODULE = 'Activity';
  * Initial state
  */
 
-const INITIAL_STATE = () => ({
+const defineInitialState = () => ({
   processingByOperation: {
     default: false,
   },
@@ -37,10 +37,10 @@ export const $done = StateHelper.createSimpleOperation(MODULE, 'done', (operatio
  * Reducer
  */
 
-export function reducer(state = INITIAL_STATE(), action) {
+export function reducer(state = defineInitialState(), action) {
   switch (action.type) {
     case $reset.ACTION:
-      return INITIAL_STATE();
+      return defineInitialState();
     case $processing.ACTION: {
       const processingByOperation = {
         ...state.processingByOperation,

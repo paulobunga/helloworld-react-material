@@ -17,9 +17,9 @@ export const MODULE = 'Home';
  * Initial state
  */
 
-const INITIAL_STATE = {
+const defineInitialState = () => ({
   tasks: null,
-};
+});
 
 /**
  * Reset
@@ -151,10 +151,10 @@ export const $removeTask = StateHelper.createAsyncOperation(MODULE, 'removeTask'
  * Reducer
  */
 
-export function reducer(state = INITIAL_STATE, action) {
+export function reducer(state = defineInitialState(), action) {
   switch (action.type) {
     case $reset.ACTION:
-      return INITIAL_STATE;
+      return defineInitialState();
     case $fetchTasks.REQUEST:
       return {
         ...state,

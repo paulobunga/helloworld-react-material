@@ -2,6 +2,8 @@ import * as Logger from '../common/logger';
 
 import * as StateHelper from '../common/state.helper';
 
+import * as Session from '../Session/state';
+
 /**
  * Module name
  */
@@ -12,10 +14,10 @@ export const MODULE = 'Shared';
  * Initial state
  */
 
-const INITIAL_STATE = {
+const defineInitialState = () => ({
   appReady: false,
-  sessionReady: false,
-};
+  appInSession: false,
+});
 
 /**
  * Ready app
@@ -33,27 +35,31 @@ export const $appReady = StateHelper.createSimpleOperation(MODULE, 'appReady', (
 });
 
 /**
- * Prepare session
+ * Start session
  */
 
-export const $prepareSession = StateHelper.createSimpleOperation(MODULE, 'prepareSession', () => {
+export const $startSession = StateHelper.createSimpleOperation(MODULE, 'startSession', () => {
   return async (dispatch) => {
     await Promise.all([
       new Promise((resolve) => setTimeout(resolve, 2000)),
       // dispatch($loadSomething()),
     ]);
 
-    return dispatch($prepareSession.action());
+    return dispatch($startSession.action());
   };
 });
 
 /**
- * Clear session
+ * Close session
  */
 
-export const $clearSession = StateHelper.createSimpleOperation(MODULE, 'clearSession', () => {
+export const $closeSession = StateHelper.createSimpleOperation(MODULE, 'closeSession', () => {
   return async (dispatch) => {
-    return dispatch($clearSession.action());
+    dispatch(Session.$reset());
+
+    // dispatch($reset()),
+
+    return dispatch($closeSession.action());
   };
 });
 
@@ -61,22 +67,22 @@ export const $clearSession = StateHelper.createSimpleOperation(MODULE, 'clearSes
  * Reducer
  */
 
-export function reducer(state = INITIAL_STATE, action) {
+export function reducer(state = defineInitialState(), action) {
   switch (action.type) {
     case $appReady.ACTION:
       return {
         ...state,
         appReady: true,
       };
-    case $prepareSession.ACTION:
+    case $startSession.ACTION:
       return {
         ...state,
-        sessionReady: true,
+        appInSession: true,
       };
-    case $clearSession.ACTION:
+    case $closeSession.ACTION:
       return {
         ...state,
-        sessionReady: false,
+        appInSession: false,
       };
     default:
       return state;

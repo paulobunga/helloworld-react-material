@@ -17,29 +17,33 @@ import * as Dialog from './Shared/Dialog';
 export default async function bootstrap() {
   const { dispatch, getState } = getStore();
 
+  await AuthService.initialize();
+
+  if (!AuthService.isAuthenticated() && getState().Auth.authenticated) {
+    dispatch(Auth.$reset());
+
+    await dispatch(Shared.$closeSession());
+  } else if (AuthService.isAuthenticated() && !getState().Auth.authenticated) {
+    await AuthService.logout();
+  }
+
+  AuthService.events.on('login', () => {
+    dispatch(Shared.$startSession()).catch((error) => Dialog.toast(Dialog.FAILURE, error.message));
+  });
+
+  AuthService.events.on('logout', () => {
+    dispatch(Shared.$closeSession()).catch((error) => Dialog.toast(Dialog.FAILURE, error.message));
+  });
+
   FetchHelper.events.on('failure', (error, response) => {
     if (AuthService.isAuthenticated() && response.status === 401) {
       dispatch(Auth.$logout());
     }
   });
 
-  await AuthService.initialize();
-
-  if (!AuthService.isAuthenticated() && getState().Auth.authenticated) {
-    dispatch(Auth.$reset());
-  }
-
-  dispatch(Shared.$appReady());
+  await dispatch(Shared.$appReady());
 
   if (AuthService.isAuthenticated()) {
-    dispatch(Shared.$prepareSession()).catch((error) => Dialog.toast(Dialog.FAILURE, error.message));
+    await dispatch(Shared.$startSession()).catch((error) => Dialog.toast(Dialog.FAILURE, error.message));
   }
-
-  AuthService.events.on('login', () => {
-    dispatch(Shared.$prepareSession()).catch((error) => Dialog.toast(Dialog.FAILURE, error.message));
-  });
-
-  AuthService.events.on('logout', () => {
-    dispatch(Shared.$clearSession());
-  });
 }

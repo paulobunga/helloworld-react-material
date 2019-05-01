@@ -17,10 +17,10 @@ export const MODULE = 'Auth';
  * Initial state
  */
 
-const INITIAL_STATE = {
+const defineInitialState = () => ({
   authenticated: false,
   user: null,
-};
+});
 
 /**
  * Reset
@@ -112,8 +112,10 @@ export const $fetchProfile = StateHelper.createAsyncOperation(MODULE, 'fetchProf
  * Reducer
  */
 
-export function reducer(state = INITIAL_STATE, action) {
+export function reducer(state = defineInitialState(), action) {
   switch (action.type) {
+    case $reset.ACTION:
+      return defineInitialState();
     case $login.REQUEST:
       return {
         ...state,
