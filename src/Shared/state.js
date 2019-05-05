@@ -2,7 +2,7 @@ import * as Logger from '../common/logger';
 
 import * as StateHelper from '../common/state.helper';
 
-import * as Session from '../Session/state';
+import $state from '../store/state.js';
 
 /**
  * Module name
@@ -55,9 +55,11 @@ export const $startSession = StateHelper.createSimpleOperation(MODULE, 'startSes
 
 export const $closeSession = StateHelper.createSimpleOperation(MODULE, 'closeSession', () => {
   return async (dispatch) => {
-    dispatch(Session.$reset());
-
-    // dispatch($reset()),
+    Object.values($state).forEach((state) => {
+      if (state.$reset) {
+        dispatch(state.$reset());
+      }
+    });
 
     return dispatch($closeSession.action());
   };
