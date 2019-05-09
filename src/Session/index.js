@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-
+import { connect } from 'react-redux';
 import {
   Switch, Route, Redirect, Link, withRouter,
 } from 'react-router-dom';
@@ -17,8 +17,6 @@ import {
   IconButton,
   Icon,
 } from '@material-ui/core';
-
-import { connect } from 'react-redux';
 
 import * as PropTypes from '../common/proptypes';
 
@@ -50,7 +48,7 @@ const styles = {
 
 class Session extends Component {
   state = {
-    swipeableDrawerCallapsed: false,
+    navigationMenuVisible: false,
     navigationMenuItems: [
       {
         title: 'Home',
@@ -65,11 +63,11 @@ class Session extends Component {
     ],
   };
 
-  toggleDrawer = (open) => () => {
-    this.setState({
-      swipeableDrawerCallapsed: open,
-    });
-  };
+  toggleNavigationMenuVisibility() {
+    this.setState((state) => ({
+      navigationMenuVisible: !state.navigationMenuVisible,
+    }));
+  }
 
   logout() {
     const { dispatch } = this.props;
@@ -80,14 +78,15 @@ class Session extends Component {
   }
 
   render() {
-    const { swipeableDrawerCallapsed, navigationMenuItems } = this.state;
-    const { user, logout } = this.props;
+    const { navigationMenuVisible, navigationMenuItems } = this.state;
+
+    const { user } = this.props;
 
     return (
       <div className="-x-fit">
         <AppBar position="static">
           <Toolbar>
-            <IconButton style={styles.menuButton} color="inherit" onClick={this.toggleDrawer(true)}>
+            <IconButton style={styles.menuButton} color="inherit" onClick={() => this.toggleNavigationMenuVisibility()}>
               <Icon>menu</Icon>
             </IconButton>
 
@@ -98,11 +97,16 @@ class Session extends Component {
         </AppBar>
 
         <SwipeableDrawer
-          open={swipeableDrawerCallapsed}
-          onClose={this.toggleDrawer(false)}
-          onOpen={this.toggleDrawer(true)}
+          open={navigationMenuVisible}
+          onClose={() => this.toggleNavigationMenuVisibility()}
+          onOpen={() => this.toggleNavigationMenuVisibility()}
         >
-          <div tabIndex={0} role="button" onClick={this.toggleDrawer(false)} onKeyDown={this.toggleDrawer(false)}>
+          <div
+            tabIndex={0}
+            role="button"
+            onClick={() => this.toggleNavigationMenuVisibility()}
+            onKeyDown={() => this.toggleNavigationMenuVisibility()}
+          >
             <ListItem style={styles.listItem}>
               <Avatar alt={user.name} src={user.picture} />
               <ListItemText primary={user.name} secondary={user.email} />
@@ -111,8 +115,8 @@ class Session extends Component {
             <Divider />
 
             {navigationMenuItems.map((navigationMenuItem) => (
-              <Link to={navigationMenuItem.route} key={navigationMenuItem.title}>
-                <ListItem dense button i-key={navigationMenuItem.title}>
+              <Link to={navigationMenuItem.route} key={navigationMenuItem.route}>
+                <ListItem dense button selected={navigationMenuItem.route === this.props.location.pathname}>
                   <ListItemIcon>
                     <Icon>{navigationMenuItem.icon}</Icon>
                   </ListItemIcon>
